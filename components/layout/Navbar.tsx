@@ -1,38 +1,46 @@
 import Link from "next/link";
-import Button from "@/components/ui/Button";
 
-const navItems = [
-  { label: "O klubu", href: "#about" },
-  { label: "Timovi", href: "#teams" },
-  { label: "Rezultati", href: "#results" },
-  { label: "Sponzori", href: "#sponsors" },
-  { label: "Kontakt", href: "#contact" },
+const menuItems = [
+  { title: "Početna", href: "/" },
+  { title: "O klubu", href: "/o-klubu" },
+  { title: "Timovi", href: "/timovi" },
+  { title: "Takmičenja", href: "/takmicenja" },
+  { title: "Vesti", href: "/vesti" },
+  { title: "Galerija", href: "/galerija" },
+  { title: "Partneri", href: "/partneri" },
+  { title: "Kontakt", href: "/kontakt" },
 ];
 
 export default function Navbar() {
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-blue-950/80 backdrop-blur">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href="/" className="text-xl font-black tracking-tight text-white">
-          KK <span className="text-yellow-300">BORČA</span>
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+
+        <Link href="/" className="text-2xl font-bold text-blue-900">
+          KK <span className="text-yellow-500">Borča</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-semibold text-blue-100 transition hover:text-yellow-300"
-            >
-              {item.label}
-            </Link>
+        <ul className="hidden lg:flex items-center gap-8">
+          {menuItems.map((item) => (
+            <li key={item.title}>
+              <Link
+                href={item.href}
+                className="font-medium text-slate-700 hover:text-blue-700 transition-colors"
+              >
+                {item.title}
+              </Link>
+            </li>
           ))}
-        </nav>
+        </ul>
 
-        <div className="hidden md:block">
-          <Button>Pridruži se</Button>
-        </div>
-      </div>
+        <Link
+          href="/postani-clan"
+          className="rounded-full bg-yellow-400 hover:bg-yellow-500 px-6 py-3 font-semibold transition-colors"
+        >
+          Pridruži se
+        </Link>
+
+      </nav>
     </header>
   );
 }

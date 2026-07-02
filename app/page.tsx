@@ -1,4 +1,3 @@
-import Navbar from "@/components/layout/Navbar";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -7,7 +6,7 @@ import Card from "@/components/ui/Card";
 export default function Home() {
   return (
     <main className="min-h-screen bg-white text-slate-900">
-      <Navbar />
+  
 
       <section className="flex min-h-screen items-center bg-blue-700 text-white">
         <Container className="text-center">
