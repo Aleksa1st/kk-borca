@@ -1,12 +1,19 @@
-import PageHeader from "@/components/ui/PageHeader";
+import Hero from "@/components/home/Hero";
+import AboutClub from "@/components/home/AboutClub";
+import Statistics from "@/components/home/Statistics";
+import MoreThanBasketball from "@/components/home/MoreThanBasketball";
+import ClubLife from "@/components/home/ClubLife";
+import ParentsChoose from "@/components/home/ParentsChoose";
 
-export default function TakmicenjaPage() {
+export default function Home() {
   return (
     <main>
-      <PageHeader
-        title="Takmičenja"
-        description="Pratite raspored utakmica, rezultate, tabele i statistiku svih selekcija KK Borča."
-      />
+      <Hero />
+      <AboutClub />
+      <Statistics />
+      <MoreThanBasketball />
+      <ClubLife />
+      <ParentsChoose />
     </main>
   );
 }
