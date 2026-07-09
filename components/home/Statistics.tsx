@@ -1,67 +1,57 @@
+const stats = [
+  {
+    number: "30",
+    label: "godina tradicije",
+  },
+  {
+    number: "2.500+",
+    label: "dece prošlo kroz klub",
+  },
+  {
+    number: "160+",
+    label: "aktivnih članova",
+  },
+  {
+    number: "8",
+    label: "takmičarskih selekcija",
+  },
+];
+
 export default function Statistics() {
-  const stats = [
-    {
-      number: "160+",
-      label: "Dece u klubu",
-    },
-    {
-      number: "8",
-      label: "Takmičarskih ekipa",
-    },
-    {
-      number: "5",
-      label: "Trenera",
-    },
-    {
-      number: "25",
-      label: "Treninga nedeljno",
-    },
-  ];
-
   return (
-    <section className="bg-blue-950 py-24">
+    <section className="bg-blue-950 py-24 text-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
         <div className="mx-auto max-w-3xl text-center">
-
           <p className="font-bold uppercase tracking-[0.3em] text-yellow-300">
-            KK BORČA
+            Brojevi koji govore
           </p>
 
-          <h2 className="mt-4 text-4xl font-black text-white md:text-5xl">
-            Brojevi koji govore više od reči.
+          <h2 className="mt-4 text-4xl font-black tracking-tight md:text-5xl">
+            Tri decenije poverenja.
           </h2>
 
           <p className="mt-6 text-xl leading-8 text-blue-100">
-            Gotovo tri decenije posvećenog rada sa decom,
-            porodicama i zajednicom.
+            KK Borča je kroz godine postao mesto gde deca treniraju, odrastaju i
+            nose vrednosti koje ostaju za ceo život.
           </p>
-
         </div>
 
-        <div className="mt-20 grid gap-8 md:grid-cols-4">
-
-          {stats.map((item) => (
-
+        <div className="mt-20 grid gap-10 md:grid-cols-4">
+          {stats.map((stat) => (
             <div
-              key={item.label}
-              className="rounded-3xl bg-white p-10 text-center shadow-2xl transition duration-300 hover:-translate-y-2"
+              key={stat.label}
+              className="border-l-4 border-yellow-300 pl-6"
             >
-
-              <p className="text-6xl font-black text-blue-700">
-                {item.number}
+              <p className="text-6xl font-black tracking-tight text-yellow-300">
+                {stat.number}
               </p>
 
-              <p className="mt-5 text-lg font-semibold text-slate-700">
-                {item.label}
+              <p className="mt-4 text-lg font-semibold uppercase tracking-wide text-blue-100">
+                {stat.label}
               </p>
-
             </div>
-
           ))}
-
         </div>
-
       </div>
     </section>
   );
