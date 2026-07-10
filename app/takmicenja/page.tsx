@@ -1,3 +1,6 @@
+const wabaArticle =
+  "https://waba-league.com/waba-u15-sa-17-klubova/";
+
 const season2025 = [
   "Mlađi pioniri U13 – Beogradska liga",
   "Pioniri U15 – Beogradska liga",
@@ -7,13 +10,27 @@ const season2025 = [
   "Pionirke U13 – jedan tim 1/4 finale, drugi tim 1/8 finale",
 ];
 
-const season2026Boys = ["Mlađi pioniri U13", "Pioniri U15", "Kadeti U17", "Juniori U18"];
+const season2026Boys = [
+  "Mlađi pioniri U13",
+  "Pioniri U15",
+  "Kadeti U17",
+  "Juniori U18",
+];
 
 const season2026Girls = [
   "Mlađe pionirke U13 – Beogradska liga",
   "Pionirke U15 – Kvalitetna Beogradska liga",
   "Pionirke U15 – WABA regionalna liga",
   "Kadetkinje U17 – Beogradska liga",
+];
+
+const wabaCountries = [
+  "Italija",
+  "Slovenija",
+  "Hrvatska",
+  "Bosna i Hercegovina",
+  "Crna Gora",
+  "Srbija",
 ];
 
 export default function TakmicenjaPage() {
@@ -83,6 +100,7 @@ export default function TakmicenjaPage() {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="rounded-3xl bg-white p-7 text-blue-950 shadow-xl">
               <h3 className="text-2xl font-black">Dečaci</h3>
+
               <ul className="mt-5 space-y-3">
                 {season2026Boys.map((item) => (
                   <li key={item} className="font-semibold">
@@ -94,6 +112,7 @@ export default function TakmicenjaPage() {
 
             <div className="rounded-3xl bg-white p-7 text-blue-950 shadow-xl">
               <h3 className="text-2xl font-black">Devojčice</h3>
+
               <ul className="mt-5 space-y-3">
                 {season2026Girls.map((item) => (
                   <li key={item} className="font-semibold">
@@ -114,37 +133,45 @@ export default function TakmicenjaPage() {
             </p>
 
             <h2 className="mt-4 text-4xl font-black text-blue-950 md:text-5xl">
-              Pionirke KK Borča jedini predstavnik Srbije.
+              Pionirke KK Borča na regionalnoj sceni.
             </h2>
 
             <p className="mt-6 text-xl leading-9 text-slate-700">
-              U sezoni 2026/27 pionirke U15 učestvovaće u regionalnoj WABA ligi,
-              u kojoj se takmiči 17 timova iz 6 zemalja: Italije, Slovenije,
-              Hrvatske, Bosne i Hercegovine i Crne Gore.
+              U sezoni 2026/27 pionirke U15 učestvovaće u regionalnoj WABA
+              ligi, koja okuplja 17 klubova iz šest zemalja.
             </p>
 
             <p className="mt-5 text-xl font-bold leading-9 text-blue-950">
-              KK Borča će biti jedini predstavnik Srbije u ovom takmičenju.
+              Pred našim igračicama je prilika da stiču međunarodno iskustvo i
+              predstavljaju Borču i Srbiju na regionalnoj košarkaškoj sceni.
             </p>
+
+            <a
+              href={wabaArticle}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block rounded-full bg-blue-700 px-8 py-4 font-bold text-white transition hover:bg-blue-800"
+            >
+              Pročitaj zvaničnu WABA objavu ↗
+            </a>
           </div>
 
           <div className="rounded-3xl bg-white p-8 shadow-xl">
             <p className="text-6xl font-black text-blue-700">17</p>
+
             <p className="mt-3 text-xl font-bold text-blue-950">
-              timova iz 6 zemalja
+              klubova iz šest zemalja
             </p>
 
             <div className="mt-8 grid gap-3">
-              {["Italija", "Slovenija", "Hrvatska", "Bosna i Hercegovina", "Crna Gora", "Srbija"].map(
-                (country) => (
-                  <div
-                    key={country}
-                    className="rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-700"
-                  >
-                    {country}
-                  </div>
-                )
-              )}
+              {wabaCountries.map((country) => (
+                <div
+                  key={country}
+                  className="rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-700"
+                >
+                  {country}
+                </div>
+              ))}
             </div>
           </div>
         </div>
