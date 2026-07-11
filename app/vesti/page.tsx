@@ -1,41 +1,20 @@
+import Image from "next/image";
 import Link from "next/link";
-
-const wabaArticle =
-  "https://waba-league.com/waba-u15-sa-17-klubova/";
-
-const newsItems = [
-  {
-    category: "Nova sezona",
-    title: "Pripreme za sezonu 2026/27",
-    description:
-      "KK Borča priprema dečačke i ženske selekcije za novu sezonu. Tačni termini treninga i raspored takmičenja biće objavljeni pre početka priprema.",
-    date: "Sezona 2026/27",
-  },
-  {
-    category: "Devojčice",
-    title: "Pionirke KK Borča u regionalnoj WABA ligi",
-    description:
-      "Naše pionirke U15 nastupaće u regionalnoj WABA ligi, u kojoj učestvuje 17 klubova iz šest zemalja.",
-    date: "Najava sezone",
-    externalUrl: wabaArticle,
-  },
-  {
-    category: "Rezultati",
-    title: "Uspešna sezona mlađih pionirki",
-    description:
-      "Dve U13 ekipe KK Borča nastupale su u Beogradskoj ligi. Jedna ekipa stigla je do četvrtfinala, a druga do osmine finala.",
-    date: "Sezona 2025/26",
-  },
-  {
-    category: "Klub",
-    title: "Trideset godina stvaranja generacija",
-    description:
-      "Od osnivanja 1996. godine kroz KK Borča prošlo je više od 2.500 dečaka i devojčica.",
-    date: "1996–2026",
-  },
-];
+import {
+  getAllNewsArticles,
+  getFeaturedArticle,
+} from "@/lib/news";
 
 export default function VestiPage() {
+  const articles = getAllNewsArticles();
+  const featuredArticle = getFeaturedArticle();
+
+  const remainingArticles = featuredArticle
+    ? articles.filter(
+        (article) => article.slug !== featuredArticle.slug
+      )
+    : articles;
+
   return (
     <main>
       <section className="bg-blue-950 px-6 py-28 text-white">
@@ -49,94 +28,130 @@ export default function VestiPage() {
           </h1>
 
           <p className="mt-8 max-w-3xl text-xl leading-9 text-blue-100">
-            Pratite najnovije informacije o ekipama, takmičenjima, rezultatima,
-            putovanjima i aktivnostima KK Borča.
+            Pratite najnovije informacije o ekipama, takmičenjima,
+            rezultatima, putovanjima i aktivnostima KK Borča.
           </p>
         </div>
       </section>
 
       <section className="bg-white px-6 py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-2">
-            <article className="overflow-hidden rounded-3xl bg-blue-700 text-white shadow-xl">
-              <img
-                src="/images/home/devojcice-nas-ponos.jpg"
-                alt="Pionirke KK Borča"
-                className="h-80 w-full object-cover"
-              />
+          {articles.length === 0 ? (
+            <div className="rounded-3xl bg-slate-100 p-10 text-center">
+              <h2 className="text-3xl font-black text-blue-950">
+                Vesti uskoro
+              </h2>
 
-              <div className="p-8">
-                <p className="font-bold uppercase tracking-[0.2em] text-yellow-300">
-                  Izdvajamo
-                </p>
+              <p className="mt-4 text-lg text-slate-600">
+                Trenutno nema objavljenih vesti.
+              </p>
+            </div>
+          ) : (
+            <>
+              {featuredArticle && (
+                <article className="grid overflow-hidden rounded-3xl bg-blue-700 text-white shadow-2xl lg:grid-cols-2">
+                  <div className="relative min-h-[380px]">
+                    <Image
+                      src={featuredArticle.image}
+                      alt={featuredArticle.title}
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                    />
 
-                <h2 className="mt-4 text-3xl font-black">
-                  Pionirke KK Borča u regionalnoj WABA U15 ligi
-                </h2>
-
-                <p className="mt-5 leading-8 text-blue-100">
-                  U sezoni 2026/27 naše pionirke U15 nastupaće u regionalnom
-                  takmičenju sa 17 klubova iz šest zemalja.
-                </p>
-
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                  <Link
-                    href="/takmicenja"
-                    className="rounded-full bg-yellow-400 px-7 py-3 text-center font-black text-blue-950 transition hover:bg-yellow-300"
-                  >
-                    Pogledaj takmičenja
-                  </Link>
-
-                  <a
-                    href={wabaArticle}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full border-2 border-white px-7 py-3 text-center font-bold text-white transition hover:bg-white hover:text-blue-700"
-                  >
-                    WABA članak ↗
-                  </a>
-                </div>
-              </div>
-            </article>
-
-            <div className="grid gap-6">
-              {newsItems.map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-3xl border border-slate-200 bg-slate-50 p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-                >
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <p className="font-bold uppercase tracking-[0.2em] text-blue-700">
-                      {item.category}
-                    </p>
-
-                    <p className="text-sm font-semibold text-slate-500">
-                      {item.date}
-                    </p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-950/40 to-transparent" />
                   </div>
 
-                  <h2 className="mt-4 text-2xl font-black text-blue-950">
-                    {item.title}
-                  </h2>
+                  <div className="flex flex-col justify-center p-8 md:p-12">
+                    <div className="flex flex-wrap items-center gap-4">
+                      <p className="font-bold uppercase tracking-[0.2em] text-yellow-300">
+                        Izdvajamo
+                      </p>
 
-                  <p className="mt-4 leading-7 text-slate-600">
-                    {item.description}
-                  </p>
+                      <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-blue-100">
+                        {featuredArticle.displayDate}
+                      </span>
+                    </div>
 
-                  {item.externalUrl && (
-                    <a
-                      href={item.externalUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-5 inline-block font-bold text-blue-700 transition hover:text-blue-900"
-                    >
-                      Pročitaj više na WABA sajtu ↗
-                    </a>
-                  )}
+                    <h2 className="mt-5 text-3xl font-black leading-tight md:text-4xl">
+                      {featuredArticle.title}
+                    </h2>
+
+                    <p className="mt-6 text-lg leading-8 text-blue-100">
+                      {featuredArticle.excerpt}
+                    </p>
+
+                    <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+                      <Link
+                        href={`/vesti/${featuredArticle.slug}`}
+                        className="rounded-full bg-yellow-400 px-7 py-4 text-center font-black text-blue-950 transition hover:bg-yellow-300"
+                      >
+                        Pročitaj vest
+                      </Link>
+
+                      {featuredArticle.externalUrl && (
+                        <a
+                          href={featuredArticle.externalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-full border-2 border-white px-7 py-4 text-center font-bold text-white transition hover:bg-white hover:text-blue-700"
+                        >
+                          Zvanični izvor ↗
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </article>
-              ))}
-            </div>
-          </div>
+              )}
+
+              <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                {remainingArticles.map((article) => (
+                  <article
+                    key={article.slug}
+                    className="group overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
+                  >
+                    <div className="relative h-64 overflow-hidden">
+                      <Image
+                        src={article.image}
+                        alt={article.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover transition duration-700 group-hover:scale-105"
+                      />
+                    </div>
+
+                    <div className="p-7">
+                      <div className="flex flex-wrap items-center justify-between gap-3">
+                        <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-700">
+                          {article.category}
+                        </p>
+
+                        <p className="text-sm font-semibold text-slate-500">
+                          {article.displayDate}
+                        </p>
+                      </div>
+
+                      <h2 className="mt-4 text-2xl font-black leading-tight text-blue-950">
+                        {article.title}
+                      </h2>
+
+                      <p className="mt-4 leading-7 text-slate-600">
+                        {article.excerpt}
+                      </p>
+
+                      <Link
+                        href={`/vesti/${article.slug}`}
+                        className="mt-6 inline-flex font-black text-blue-700 transition hover:text-blue-900"
+                      >
+                        Pročitaj vest →
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -147,7 +162,7 @@ export default function VestiPage() {
           </h2>
 
           <p className="mx-auto mt-6 max-w-3xl text-xl leading-8 text-slate-600">
-            Tokom sezone ova stranica će donositi najave utakmica, rezultate,
+            Tokom sezone objavljivaćemo najave utakmica, rezultate,
             izveštaje, fotografije i informacije iz svih selekcija kluba.
           </p>
         </div>
