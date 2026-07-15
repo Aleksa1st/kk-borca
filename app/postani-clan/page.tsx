@@ -33,7 +33,7 @@ const faqs = [
 export default function PostaniClanPage() {
   return (
     <main>
-      <section className="relative overflow-hidden bg-blue-950 px-6 py-32 text-white">
+      <section className="relative overflow-hidden bg-blue-950 px-6 pb-32 pt-48 text-white lg:pt-52">
         <div className="absolute inset-0 opacity-20">
           <img
             src="/images/home/hero.jpg"

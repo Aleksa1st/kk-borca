@@ -30,26 +30,30 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${
+      className={`fixed left-0 top-0 z-50 w-full overflow-visible transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 shadow-md backdrop-blur-md"
-          : "bg-white/80 backdrop-blur-md"
+          ? "bg-white/95 shadow-lg backdrop-blur-md"
+          : "bg-white/90 shadow-sm backdrop-blur-md"
       }`}
     >
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-4">
-          <div className="relative -mb-2">
+      <nav className="relative mx-auto flex h-24 max-w-7xl items-center justify-between px-6 lg:px-8">
+        <Link
+          href="/"
+          aria-label="KK Borča – početna stranica"
+          className="relative z-20 flex items-center gap-5"
+        >
+          <div className="relative h-24 w-[150px] shrink-0">
             <Image
               src="/images/home/logo.jpg"
-              alt="KK Borča"
-              width={76}
-              height={76}
+              alt="Grb KK Borča"
+              width={148}
+              height={148}
               priority
-              className="h-[76px] w-[76px] object-contain drop-shadow-lg"
+              className="absolute left-0 top-2 h-[148px] w-[148px] rounded-full object-contain drop-shadow-2xl transition-transform duration-300 hover:scale-105"
             />
           </div>
 
-          <span className="text-3xl font-black tracking-tight">
+          <span className="hidden text-3xl font-black tracking-tight sm:block">
             <span className="text-blue-700">KK </span>
             <span className="text-yellow-500">Borča</span>
           </span>
@@ -69,7 +73,7 @@ export default function Navbar() {
 
         <Link
           href="/postani-clan"
-          className="rounded-full bg-yellow-400 px-7 py-3 text-sm font-black text-blue-950 shadow-sm transition hover:bg-yellow-300"
+          className="rounded-full bg-yellow-400 px-7 py-3 text-sm font-black text-blue-950 shadow-sm transition hover:bg-yellow-300 hover:shadow-md"
         >
           Pridruži se
         </Link>

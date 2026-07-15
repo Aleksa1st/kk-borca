@@ -16,7 +16,7 @@ export default function Hero() {
       {/* Left side darker for text, right side more visible */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-950/90 via-blue-950/55 to-transparent" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-28 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-24 pt-48 lg:px-8 lg:pb-28 lg:pt-52">
         <div className="max-w-3xl">
           <p className="mb-5 inline-flex rounded-full bg-yellow-400 px-5 py-2 text-sm font-bold text-blue-950">
             KK Borča • Od 1996. godine

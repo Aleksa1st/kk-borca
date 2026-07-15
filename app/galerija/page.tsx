@@ -66,7 +66,7 @@ const galleryPhotos = [
 export default function GalerijaPage() {
   return (
     <main>
-      <section className="bg-blue-950 px-6 py-28 text-white">
+      <section className="bg-blue-950 px-6 pb-28 pt-48 text-white lg:pt-52">
         <div className="mx-auto max-w-7xl">
           <p className="font-bold uppercase tracking-[0.3em] text-yellow-300">
             Galerija

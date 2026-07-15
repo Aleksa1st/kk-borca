@@ -46,7 +46,7 @@ const values = [
 export default function OKlubuPage() {
   return (
     <main>
-      <section className="relative min-h-[75vh] overflow-hidden px-6 pb-24 pt-36 text-white">
+      <section className="relative min-h-[75vh] overflow-hidden px-6 pb-24 pt-48 text-white lg:pt-52">
         <Image
           src="/images/home/branislav.jpg"
           alt="Branislav Vujičić sa igračima KK Borča"
@@ -59,7 +59,7 @@ export default function OKlubuPage() {
         <div className="absolute inset-0 bg-black/55" />
         <div className="absolute inset-0 bg-gradient-to-r from-blue-950/85 via-blue-950/45 to-transparent" />
 
-        <div className="relative mx-auto flex min-h-[55vh] max-w-7xl items-center">
+        <div className="relative mx-auto flex min-h-[45vh] max-w-7xl items-center">
           <div className="max-w-4xl">
             <p className="font-bold uppercase tracking-[0.3em] text-yellow-300">
               O nama

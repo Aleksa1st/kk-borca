@@ -60,7 +60,7 @@ export default async function ArticlePage({
 
   return (
     <main>
-      <section className="bg-blue-950 px-6 pb-20 pt-32 text-white">
+      <section className="bg-blue-950 px-6 pb-20 pt-48 text-white lg:pt-52">
         <div className="mx-auto max-w-5xl">
           <Link
             href="/vesti"
