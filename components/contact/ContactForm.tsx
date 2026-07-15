@@ -11,38 +11,65 @@ const enquiryTypes = [
   "Ostalo",
 ];
 
-export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+type FormStatus = "idle" | "sending" | "success" | "error";
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+export default function ContactForm() {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [statusMessage, setStatusMessage] = useState("");
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const form = new FormData(event.currentTarget);
+    const formElement = event.currentTarget;
+    const formData = new FormData(formElement);
 
-    const name = String(form.get("name") ?? "");
-    const email = String(form.get("email") ?? "");
-    const phone = String(form.get("phone") ?? "");
-    const enquiry = String(form.get("enquiry") ?? "");
-    const message = String(form.get("message") ?? "");
+    const payload = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      phone: String(formData.get("phone") ?? ""),
+      enquiry: String(formData.get("enquiry") ?? ""),
+      message: String(formData.get("message") ?? ""),
+    };
 
-    const subject = encodeURIComponent(
-      `Kontakt sa sajta KK Borča — ${enquiry}`
-    );
+    setStatus("sending");
+    setStatusMessage("");
 
-    const body = encodeURIComponent(
-      [
-        `Ime i prezime: ${name}`,
-        `Email: ${email}`,
-        `Telefon: ${phone || "Nije unet"}`,
-        `Tema: ${enquiry}`,
-        "",
-        "Poruka:",
-        message,
-      ].join("\n")
-    );
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
-    window.location.href = `mailto:kkborca96@gmail.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+      const result = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+        error?: string;
+      };
+
+      if (!response.ok) {
+        throw new Error(
+          result.error || "Poruka trenutno nije mogla biti poslata."
+        );
+      }
+
+      setStatus("success");
+      setStatusMessage(
+        result.message || "Poruka je uspešno poslata. Hvala vam!"
+      );
+
+      formElement.reset();
+    } catch (error) {
+      setStatus("error");
+
+      setStatusMessage(
+        error instanceof Error
+          ? error.message
+          : "Došlo je do greške prilikom slanja poruke."
+      );
+    }
   }
 
   return (
@@ -64,7 +91,9 @@ export default function ContactForm() {
             name="name"
             type="text"
             required
-            className="mt-3 w-full rounded-2xl border border-slate-300 px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
+            maxLength={100}
+            disabled={status === "sending"}
+            className="mt-3 w-full rounded-2xl border border-slate-300 px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
             placeholder="Vaše ime i prezime"
           />
         </div>
@@ -82,7 +111,9 @@ export default function ContactForm() {
             name="email"
             type="email"
             required
-            className="mt-3 w-full rounded-2xl border border-slate-300 px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
+            maxLength={200}
+            disabled={status === "sending"}
+            className="mt-3 w-full rounded-2xl border border-slate-300 px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
             placeholder="ime@email.com"
           />
         </div>
@@ -99,7 +130,9 @@ export default function ContactForm() {
             id="phone"
             name="phone"
             type="tel"
-            className="mt-3 w-full rounded-2xl border border-slate-300 px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
+            maxLength={50}
+            disabled={status === "sending"}
+            className="mt-3 w-full rounded-2xl border border-slate-300 px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
             placeholder="06..."
           />
         </div>
@@ -117,7 +150,8 @@ export default function ContactForm() {
             name="enquiry"
             required
             defaultValue="Probni trening"
-            className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
+            disabled={status === "sending"}
+            className="mt-3 w-full rounded-2xl border border-slate-300 bg-white px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
           >
             {enquiryTypes.map((type) => (
               <option key={type} value={type}>
@@ -141,23 +175,33 @@ export default function ContactForm() {
           name="message"
           required
           rows={7}
-          className="mt-3 w-full resize-none rounded-2xl border border-slate-300 px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100"
+          maxLength={5000}
+          disabled={status === "sending"}
+          className="mt-3 w-full resize-none rounded-2xl border border-slate-300 px-5 py-4 text-slate-900 outline-none transition focus:border-blue-700 focus:ring-4 focus:ring-blue-100 disabled:cursor-not-allowed disabled:bg-slate-100"
           placeholder="Napišite kako možemo da vam pomognemo..."
         />
       </div>
 
       <button
         type="submit"
-        className="mt-8 inline-flex items-center gap-3 rounded-full bg-yellow-400 px-8 py-4 font-black text-blue-950 transition hover:bg-yellow-300"
+        disabled={status === "sending"}
+        className="mt-8 inline-flex items-center gap-3 rounded-full bg-yellow-400 px-8 py-4 font-black text-blue-950 transition hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-60"
       >
         <Send size={20} />
-        Pošalji poruku
+        {status === "sending" ? "Slanje..." : "Pošalji poruku"}
       </button>
 
-      {submitted && (
-        <p className="mt-5 text-sm font-semibold text-slate-600">
-          Otvoren je vaš email program sa pripremljenom porukom.
-        </p>
+      {statusMessage && (
+        <div
+          className={`mt-6 rounded-2xl px-5 py-4 font-semibold ${
+            status === "success"
+              ? "bg-green-50 text-green-800"
+              : "bg-red-50 text-red-700"
+          }`}
+          role="status"
+        >
+          {statusMessage}
+        </div>
       )}
     </form>
   );
