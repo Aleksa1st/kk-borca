@@ -9,6 +9,13 @@ type ContactRequest = {
   phone?: string;
   enquiry?: string;
   message?: string;
+  turnstileToken?: string;
+};
+
+type TurnstileVerificationResponse = {
+  success: boolean;
+  hostname?: string;
+  "error-codes"?: string[];
 };
 
 function escapeHtml(value: string) {
@@ -20,11 +27,83 @@ function escapeHtml(value: string) {
     .replaceAll("'", "&#039;");
 }
 
+function getClientIp(request: Request) {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0]?.trim() ?? "";
+  }
+
+  return request.headers.get("x-real-ip") ?? "";
+}
+
+async function verifyTurnstileToken(
+  token: string,
+  clientIp: string
+): Promise<boolean> {
+  const secretKey = process.env.TURNSTILE_SECRET_KEY;
+
+  if (!secretKey) {
+    console.error("TURNSTILE_SECRET_KEY is not configured.");
+    return false;
+  }
+
+  const formData = new FormData();
+  formData.append("secret", secretKey);
+  formData.append("response", token);
+
+  if (clientIp) {
+    formData.append("remoteip", clientIp);
+  }
+
+  try {
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        body: formData,
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      console.error(
+        "Turnstile verification request failed:",
+        response.status
+      );
+      return false;
+    }
+
+    const result =
+      (await response.json()) as TurnstileVerificationResponse;
+
+    if (!result.success) {
+      console.error(
+        "Turnstile verification failed:",
+        result["error-codes"] ?? []
+      );
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Turnstile verification error:", error);
+    return false;
+  }
+}
+
 export async function POST(request: Request) {
   try {
     if (!process.env.RESEND_API_KEY) {
       return NextResponse.json(
         { error: "Email servis nije konfigurisan." },
+        { status: 500 }
+      );
+    }
+
+    if (!process.env.TURNSTILE_SECRET_KEY) {
+      return NextResponse.json(
+        { error: "Bezbednosna provera nije konfigurisana." },
         { status: 500 }
       );
     }
@@ -36,10 +115,18 @@ export async function POST(request: Request) {
     const phone = body.phone?.trim() ?? "";
     const enquiry = body.enquiry?.trim() ?? "";
     const message = body.message?.trim() ?? "";
+    const turnstileToken = body.turnstileToken?.trim() ?? "";
 
     if (!name || !email || !enquiry || !message) {
       return NextResponse.json(
         { error: "Popunite sva obavezna polja." },
+        { status: 400 }
+      );
+    }
+
+    if (!turnstileToken) {
+      return NextResponse.json(
+        { error: "Završite bezbednosnu proveru." },
         { status: 400 }
       );
     }
@@ -58,11 +145,29 @@ export async function POST(request: Request) {
       email.length > 200 ||
       phone.length > 50 ||
       enquiry.length > 100 ||
-      message.length > 5000
+      message.length > 5000 ||
+      turnstileToken.length > 2048
     ) {
       return NextResponse.json(
         { error: "Uneti podaci su predugački." },
         { status: 400 }
+      );
+    }
+
+    const clientIp = getClientIp(request);
+
+    const turnstileValid = await verifyTurnstileToken(
+      turnstileToken,
+      clientIp
+    );
+
+    if (!turnstileValid) {
+      return NextResponse.json(
+        {
+          error:
+            "Bezbednosna provera nije uspela. Osvežite stranicu i pokušajte ponovo.",
+        },
+        { status: 403 }
       );
     }
 
@@ -113,7 +218,10 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json(
-      { success: true, message: "Poruka je uspešno poslata." },
+      {
+        success: true,
+        message: "Poruka je uspešno poslata.",
+      },
       { status: 200 }
     );
   } catch (error) {
