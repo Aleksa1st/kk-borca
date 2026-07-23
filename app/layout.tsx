@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
+import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kkborca.rs"),
@@ -36,6 +36,7 @@ export const metadata: Metadata = {
   ],
 
   creator: "KK Borča",
+
   publisher: "KK Borča",
 
   alternates: {
@@ -65,8 +66,11 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
+
     title: "KK Borča",
+
     description: "Košarkaški klub Borča od 1996. godine.",
+
     images: ["/og-image.png"],
   },
 
@@ -105,6 +109,7 @@ export default function RootLayout({
   return (
     <html lang="sr">
       <body>
+        <GoogleAnalytics />
         <OrganizationSchema />
         <Navbar />
         {children}
