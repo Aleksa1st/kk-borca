@@ -1,13 +1,18 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden text-white">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/images/home/hero.jpg')",
-        }}
+      <Image
+        src="/images/home/hero.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        quality={80}
+        loading="eager"
+        fetchPriority="high"
+        className="object-cover object-center"
       />
 
       {/* Darker overlay */}
