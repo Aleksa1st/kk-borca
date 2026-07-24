@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const moments = [
   {
     image: "/images/home/branislav.jpg",
@@ -56,11 +58,15 @@ export default function ClubLife() {
               key={moment.title}
               className={`group relative overflow-hidden rounded-3xl shadow-xl ${moment.size}`}
             >
-              <img
-                src={moment.image}
-                alt={moment.title}
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-              />
+              <div className="relative h-full w-full">
+                <Image
+                  src={moment.image}
+                  alt={moment.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 25vw"
+                  className="object-cover transition duration-700 group-hover:scale-110"
+                />
+              </div>
 
               <div className="absolute inset-0 bg-gradient-to-t from-blue-950/90 via-blue-950/30 to-transparent" />
 
