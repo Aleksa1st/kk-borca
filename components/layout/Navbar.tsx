@@ -43,14 +43,16 @@ export default function Navbar() {
           className="relative z-20 flex items-center gap-5"
         >
           <div className="relative h-24 w-[150px] shrink-0">
-            <Image
-              src="/images/home/logo.jpg"
-              alt="Grb KK Borča"
-              width={148}
-              height={148}
-              priority
-              className="absolute left-0 top-2 h-[148px] w-[148px] rounded-full object-contain drop-shadow-2xl transition-transform duration-300 hover:scale-105"
-            />
+           <Image
+  src="/images/home/logo.jpg"
+  alt="Grb KK Borča"
+  width={148}
+  height={148}
+  loading="eager"
+  fetchPriority="high"
+  sizes="148px"
+  className="absolute left-0 top-2 h-[148px] w-[148px] rounded-full object-contain drop-shadow-2xl transition-transform duration-300 hover:scale-105"
+/>
           </div>
 
           <span className="hidden text-3xl font-black tracking-tight sm:block">
