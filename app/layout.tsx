@@ -6,7 +6,7 @@ import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kkborca.rs"),
+  metadataBase: new URL("https://www.kkborca.rs"),
 
   title: {
     default: "KK Borča | Košarkaški klub Borča od 1996. godine",
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
   keywords: [
     "KK Borča",
     "Borča",
-    "Košarka",
-    "Košarkaški klub",
-    "Škola košarke",
-    "Košarka za decu",
-    "Basketball Academy",
-    "Basketball Belgrade",
-    "Sportski klub",
-    "Probni trening",
+    "košarka",
+    "košarkaški klub",
+    "škola košarke",
+    "košarka za decu",
+    "basketball academy",
+    "basketball Belgrade",
+    "sportski klub",
+    "probni trening",
   ],
 
   authors: [
@@ -36,41 +36,35 @@ export const metadata: Metadata = {
   ],
 
   creator: "KK Borča",
-
   publisher: "KK Borča",
 
   alternates: {
-    canonical: "https://kkborca.rs",
+    canonical: "https://www.kkborca.rs",
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://kkborca.rs",
+    url: "https://www.kkborca.rs",
     siteName: "KK Borča",
-
     title: "KK Borča | Košarkaški klub Borča od 1996. godine",
-
     description:
       "Pridružite se jednom od najdugovečnijih košarkaških klubova u Borči. Više od 160 aktivnih članova, stručni treneri i besplatan probni trening.",
-
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "KK Borča",
+        alt: "KK Borča – košarkaški klub iz Beograda",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-
-    title: "KK Borča",
-
-    description: "Košarkaški klub Borča od 1996. godine.",
-
+    title: "KK Borča | Košarkaški klub Borča",
+    description:
+      "Košarkaški klub iz Beograda koji od 1996. godine razvija dečake i devojčice kroz sport, timski duh i zajedništvo.",
     images: ["/og-image.png"],
   },
 
