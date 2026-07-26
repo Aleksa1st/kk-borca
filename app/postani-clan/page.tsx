@@ -1,4 +1,45 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: {
+    absolute:
+      "Postani član KK Borča | Besplatan probni trening za decu",
+  },
+
+  description:
+    "Prijavite dete uzrasta od 6 do 17 godina na besplatan probni trening u KK Borča. Škola košarke za dečake i devojčice u Borči i Padinskoj Skeli.",
+
+  alternates: {
+    canonical: "https://www.kkborca.rs/postani-clan",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "sr_RS",
+    url: "https://www.kkborca.rs/postani-clan",
+    siteName: "KK Borča",
+    title: "Postani član KK Borča | Besplatan probni trening za decu",
+    description:
+      "Prijavite dete uzrasta od 6 do 17 godina na besplatan probni trening u KK Borča. Škola košarke za dečake i devojčice u Borči i Padinskoj Skeli.",
+    images: [
+      {
+        url: "/images/home/hero.jpg",
+        width: 1600,
+        height: 1200,
+        alt: "Dečaci i devojčice na košarkaškom treningu KK Borča",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Postani član KK Borča",
+    description:
+      "Prijavite dete od 6 do 17 godina na besplatan probni trening u školi košarke KK Borča.",
+    images: ["/images/home/hero.jpg"],
+  },
+};
 
 const benefits = [
   "30 godina tradicije",
@@ -100,6 +141,7 @@ export default function PostaniClanPage() {
                 <p className="text-5xl font-black text-yellow-400">
                   0{index + 1}
                 </p>
+
                 <h3 className="mt-6 text-2xl font-black text-blue-950">
                   {step}
                 </h3>
@@ -125,6 +167,7 @@ export default function PostaniClanPage() {
             {faqs.map((item) => (
               <div key={item.q} className="rounded-3xl bg-slate-100 p-7">
                 <h3 className="text-xl font-black text-blue-950">{item.q}</h3>
+
                 <p className="mt-3 leading-7 text-slate-600">{item.a}</p>
               </div>
             ))}

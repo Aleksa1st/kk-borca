@@ -1,4 +1,43 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: {
+    absolute:
+      "Galerija KK Borča | Treninzi, utakmice i istorija kluba",
+  },
+
+  description:
+    "Pogledajte fotografije KK Borča kroz tri decenije: prve generacije, treninzi, utakmice, putovanja, uspesi i život kluba od 1996. godine.",
+
+  alternates: {
+    canonical: "https://www.kkborca.rs/galerija",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "sr_RS",
+    url: "https://www.kkborca.rs/galerija",
+    siteName: "KK Borča",
+    title: "Galerija KK Borča | Treninzi, utakmice i istorija kluba",
+    description:
+      "Pogledajte fotografije KK Borča kroz tri decenije: prve generacije, treninzi, utakmice, putovanja, uspesi i život kluba od 1996. godine.",
+    images: [
+      {
+        url: "/images/home/kkborca-1996.png",
+        alt: "Prva generacija igrača KK Borča iz 1996. godine",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Galerija KK Borča",
+    description:
+      "Fotografije prvih generacija, treninga, utakmica, putovanja i života KK Borča od 1996. godine.",
+    images: ["/images/home/kkborca-1996.png"],
+  },
+};
 
 const galleryPhotos = [
   {

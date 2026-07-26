@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Building2,
@@ -7,6 +8,45 @@ import {
   Phone,
 } from "lucide-react";
 import ContactForm from "@/components/contact/ContactForm";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Kontakt KK Borča | Probni trening, članstvo i partnerstva",
+  },
+
+  description:
+    "Kontaktirajte KK Borča za probni trening, članstvo, partnerstva ili informacije o treninzima. Telefon, e-mail, lokacije treninga i kontakt forma na jednom mestu.",
+
+  alternates: {
+    canonical: "https://www.kkborca.rs/kontakt",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "sr_RS",
+    url: "https://www.kkborca.rs/kontakt",
+    siteName: "KK Borča",
+    title: "Kontakt KK Borča | Probni trening, članstvo i partnerstva",
+    description:
+      "Kontaktirajte KK Borča za probni trening, članstvo, partnerstva ili informacije o treninzima. Telefon, e-mail, lokacije treninga i kontakt forma na jednom mestu.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kontakt KK Borča",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Kontakt KK Borča",
+    description:
+      "Kontaktirajte KK Borča za probni trening, članstvo, partnerstva i informacije o treninzima.",
+    images: ["/og-image.png"],
+  },
+};
 
 const trainingLocations = [
   {

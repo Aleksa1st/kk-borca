@@ -1,9 +1,49 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
   getAllNewsArticles,
   getFeaturedArticle,
 } from "@/lib/news";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "Vesti KK Borča | Utakmice, rezultati i život kluba",
+  },
+
+  description:
+    "Pratite najnovije vesti KK Borča: najave i izveštaje sa utakmica, rezultate, turnire, putovanja i aktivnosti svih selekcija kluba.",
+
+  alternates: {
+    canonical: "https://www.kkborca.rs/vesti",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "sr_RS",
+    url: "https://www.kkborca.rs/vesti",
+    siteName: "KK Borča",
+    title: "Vesti KK Borča | Utakmice, rezultati i život kluba",
+    description:
+      "Pratite najnovije vesti KK Borča: najave i izveštaje sa utakmica, rezultate, turnire, putovanja i aktivnosti svih selekcija kluba.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Najnovije vesti KK Borča",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Vesti KK Borča",
+    description:
+      "Najave utakmica, rezultati, turniri, putovanja i priče iz svih selekcija KK Borča.",
+    images: ["/og-image.png"],
+  },
+};
 
 export default function VestiPage() {
   const articles = getAllNewsArticles();

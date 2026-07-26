@@ -1,56 +1,80 @@
 import type { MetadataRoute } from "next";
+import {
+  getAllNewsSlugs,
+  getNewsArticleBySlug,
+} from "@/lib/news";
+
+const SITE_URL = "https://kkborca.rs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://kkborca.rs";
-
-  return [
+  const staticPages: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: SITE_URL,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/o-klubu`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/o-klubu`,
       changeFrequency: "monthly",
-      priority: 0.9,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/timovi`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/timovi`,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/takmicenja`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/takmicenja`,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/partneri`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/vesti`,
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/galerija`,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/partneri`,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/galerija`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/kontakt`,
-      lastModified: new Date(),
-      changeFrequency: "yearly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/postani-clan`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
+      url: `${SITE_URL}/postani-clan`,
+      changeFrequency: "monthly",
       priority: 0.9,
     },
+    {
+      url: `${SITE_URL}/kontakt`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
   ];
+
+  const newsPages: MetadataRoute.Sitemap = getAllNewsSlugs()
+    .map((slug) => {
+      const article = getNewsArticleBySlug(slug);
+
+      if (!article) {
+        return null;
+      }
+
+      return {
+        url: `${SITE_URL}/vesti/${slug}`,
+        lastModified: new Date(article.date),
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      };
+    })
+    .filter(
+      (
+        page,
+      ): page is NonNullable<typeof page> => page !== null,
+    );
+
+  return [...staticPages, ...newsPages];
 }

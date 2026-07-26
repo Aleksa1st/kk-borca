@@ -1,5 +1,45 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: "O klubu | KK Borča – košarkaški klub iz Beograda",
+  },
+
+  description:
+    "Upoznajte istoriju KK Borča, košarkaškog kluba iz Beograda koji od 1996. godine razvija dečake i devojčice kroz sport, timski duh i zajedništvo.",
+
+  alternates: {
+    canonical: "https://www.kkborca.rs/o-klubu",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "sr_RS",
+    url: "https://www.kkborca.rs/o-klubu",
+    siteName: "KK Borča",
+    title: "O klubu | KK Borča – košarkaški klub iz Beograda",
+    description:
+      "Upoznajte istoriju KK Borča, košarkaškog kluba iz Beograda koji od 1996. godine razvija dečake i devojčice kroz sport, timski duh i zajedništvo.",
+    images: [
+      {
+        url: "/images/home/branislav.jpg",
+        width: 1024,
+        height: 600,
+        alt: "Branislav Vujičić sa igračima KK Borča",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "O klubu | KK Borča",
+    description:
+      "Upoznajte istoriju KK Borča, košarkaškog kluba iz Beograda koji od 1996. godine razvija mlade košarkaše i košarkašice.",
+    images: ["/images/home/branislav.jpg"],
+  },
+};
 
 const milestones = [
   {

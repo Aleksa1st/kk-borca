@@ -1,3 +1,46 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    absolute:
+      "Takmičenja i rezultati KK Borča | Beogradske i WABA lige",
+  },
+
+  description:
+    "Pratite takmičenja i rezultate mlađih selekcija KK Borča u Beogradskim ligama i regionalnoj WABA ligi, od U13 do U18 kategorija.",
+
+  alternates: {
+    canonical: "https://www.kkborca.rs/takmicenja",
+  },
+
+  openGraph: {
+    type: "website",
+    locale: "sr_RS",
+    url: "https://www.kkborca.rs/takmicenja",
+    siteName: "KK Borča",
+    title:
+      "Takmičenja i rezultati KK Borča | Beogradske i WABA lige",
+    description:
+      "Pratite takmičenja i rezultate mlađih selekcija KK Borča u Beogradskim ligama i regionalnoj WABA ligi, od U13 do U18 kategorija.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Takmičenja i rezultati selekcija KK Borča",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Takmičenja i rezultati KK Borča",
+    description:
+      "Pratite selekcije KK Borča od U13 do U18 u Beogradskim ligama i regionalnoj WABA ligi.",
+    images: ["/og-image.png"],
+  },
+};
+
 const wabaArticle =
   "https://waba-league.com/waba-u15-sa-17-klubova/";
 
