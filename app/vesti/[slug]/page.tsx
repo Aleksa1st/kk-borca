@@ -34,7 +34,7 @@ export async function generateMetadata({
 
   if (!article) {
     return {
-      title: "Vest nije pronađena | KK Borča",
+      title: "Vest nije pronađena",
       description: "Tražena vest nije pronađena na sajtu KK Borča.",
       robots: {
         index: false,
@@ -49,8 +49,10 @@ export async function generateMetadata({
     : DEFAULT_OG_IMAGE;
 
   return {
-    title: `${article.title} | KK Borča`,
+    title: article.title,
+
     description: article.excerpt,
+
     keywords: [
       "KK Borča",
       "Košarkaški klub Borča",
@@ -60,17 +62,21 @@ export async function generateMetadata({
       article.category,
       article.title,
     ],
+
     alternates: {
       canonical: articleUrl,
     },
+
     authors: [
       {
         name: SITE_NAME,
         url: SITE_URL,
       },
     ],
+
     creator: SITE_NAME,
     publisher: SITE_NAME,
+
     robots: {
       index: true,
       follow: true,
@@ -82,6 +88,7 @@ export async function generateMetadata({
         "max-video-preview": -1,
       },
     },
+
     openGraph: {
       type: "article",
       locale: "sr_RS",
@@ -101,6 +108,7 @@ export async function generateMetadata({
         },
       ],
     },
+
     twitter: {
       card: "summary_large_image",
       title: article.title,
@@ -121,7 +129,9 @@ export default async function ArticlePage({
   }
 
   const mdxComponents = useMDXComponents({});
+
   const articleUrl = `${SITE_URL}/vesti/${slug}`;
+
   const imageUrl = article.image
     ? new URL(article.image, SITE_URL).toString()
     : DEFAULT_OG_IMAGE;
@@ -130,26 +140,35 @@ export default async function ArticlePage({
     "@context": "https://schema.org",
     "@type": "NewsArticle",
     "@id": `${articleUrl}#article`,
+
     headline: article.title,
     description: article.excerpt,
+
     image: [imageUrl],
+
     datePublished: article.date,
     dateModified: article.date,
+
     inLanguage: "sr-Latn-RS",
+
     articleSection: article.category,
+
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": articleUrl,
     },
+
     author: {
       "@type": "SportsOrganization",
       name: SITE_NAME,
       url: SITE_URL,
     },
+
     publisher: {
       "@type": "SportsOrganization",
       name: SITE_NAME,
       url: SITE_URL,
+
       logo: {
         "@type": "ImageObject",
         url: ORGANIZATION_LOGO,
@@ -160,6 +179,7 @@ export default async function ArticlePage({
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+
     itemListElement: [
       {
         "@type": "ListItem",
@@ -187,7 +207,10 @@ export default async function ArticlePage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+          __html: JSON.stringify(articleJsonLd).replace(
+            /</g,
+            "\\u003c",
+          ),
         }}
       />
 

@@ -9,22 +9,22 @@ import {
 } from "lucide-react";
 import ContactForm from "@/components/contact/ContactForm";
 
+const SITE_URL = "https://kkborca.rs";
+
 export const metadata: Metadata = {
-  title: {
-    absolute: "Kontakt KK Borča | Probni trening, članstvo i partnerstva",
-  },
+  title: "Kontakt – probni trening, članstvo i partnerstva",
 
   description:
     "Kontaktirajte KK Borča za probni trening, članstvo, partnerstva ili informacije o treninzima. Telefon, e-mail, lokacije treninga i kontakt forma na jednom mestu.",
 
   alternates: {
-    canonical: "https://www.kkborca.rs/kontakt",
+    canonical: `${SITE_URL}/kontakt`,
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs/kontakt",
+    url: `${SITE_URL}/kontakt`,
     siteName: "KK Borča",
     title: "Kontakt KK Borča | Probni trening, članstvo i partnerstva",
     description:

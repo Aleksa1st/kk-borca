@@ -1,22 +1,21 @@
 import type { Metadata } from "next";
 
+const SITE_URL = "https://kkborca.rs";
+
 export const metadata: Metadata = {
-  title: {
-    absolute:
-      "Takmičenja i rezultati KK Borča | Beogradske i WABA lige",
-  },
+  title: "Takmičenja i rezultati – Beogradske i WABA lige",
 
   description:
     "Pratite takmičenja i rezultate mlađih selekcija KK Borča u Beogradskim ligama i regionalnoj WABA ligi, od U13 do U18 kategorija.",
 
   alternates: {
-    canonical: "https://www.kkborca.rs/takmicenja",
+    canonical: `${SITE_URL}/takmicenja`,
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs/takmicenja",
+    url: `${SITE_URL}/takmicenja`,
     siteName: "KK Borča",
     title:
       "Takmičenja i rezultati KK Borča | Beogradske i WABA lige",

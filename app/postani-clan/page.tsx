@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const SITE_URL = "https://kkborca.rs";
+
 export const metadata: Metadata = {
-  title: {
-    absolute:
-      "Postani član KK Borča | Besplatan probni trening za decu",
-  },
+  title: "Postani član – besplatan probni trening za decu",
 
   description:
     "Prijavite dete uzrasta od 6 do 17 godina na besplatan probni trening u KK Borča. Škola košarke za dečake i devojčice u Borči i Padinskoj Skeli.",
 
   alternates: {
-    canonical: "https://www.kkborca.rs/postani-clan",
+    canonical: `${SITE_URL}/postani-clan`,
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs/postani-clan",
+    url: `${SITE_URL}/postani-clan`,
     siteName: "KK Borča",
     title: "Postani član KK Borča | Besplatan probni trening za decu",
     description:

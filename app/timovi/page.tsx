@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+const SITE_URL = "https://kkborca.rs";
+
 export const metadata: Metadata = {
-  title: {
-    absolute: "Timovi i škola košarke za decu u Borči | KK Borča",
-  },
+  title: "Timovi i škola košarke za decu u Borči",
 
   description:
     "Upoznajte razvojne i takmičarske selekcije KK Borča za dečake i devojčice od 6 do 17 godina. Škola košarke i treninzi u Borči i Padinskoj Skeli.",
 
   alternates: {
-    canonical: "https://www.kkborca.rs/timovi",
+    canonical: `${SITE_URL}/timovi`,
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs/timovi",
+    url: `${SITE_URL}/timovi`,
     siteName: "KK Borča",
     title: "Timovi i škola košarke za decu u Borči | KK Borča",
     description:

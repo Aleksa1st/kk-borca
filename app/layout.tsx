@@ -5,8 +5,13 @@ import Footer from "@/components/layout/Footer";
 import OrganizationSchema from "@/components/seo/OrganizationSchema";
 import GoogleAnalytics from "@/components/seo/GoogleAnalytics";
 
+const SITE_URL = "https://kkborca.rs";
+const SITE_NAME = "KK Borča";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.kkborca.rs"),
+  metadataBase: new URL(SITE_URL),
+
+  applicationName: SITE_NAME,
 
   title: {
     default: "KK Borča | Košarkaški klub Borča od 1996. godine",
@@ -18,12 +23,17 @@ export const metadata: Metadata = {
 
   keywords: [
     "KK Borča",
+    "Košarkaški klub Borča",
     "Borča",
     "košarka",
-    "košarkaški klub",
+    "košarka Beograd",
+    "košarka Borča",
+    "košarkaški klub Beograd",
     "škola košarke",
+    "škola košarke Borča",
     "košarka za decu",
-    "basketball academy",
+    "košarka za dečake",
+    "košarka za devojčice",
     "basketball Belgrade",
     "sportski klub",
     "probni trening",
@@ -31,25 +41,40 @@ export const metadata: Metadata = {
 
   authors: [
     {
-      name: "KK Borča",
+      name: SITE_NAME,
+      url: SITE_URL,
     },
   ],
 
-  creator: "KK Borča",
-  publisher: "KK Borča",
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+
+  category: "sport",
 
   alternates: {
-    canonical: "https://www.kkborca.rs",
+    canonical: "/",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs",
-    siteName: "KK Borča",
+    url: SITE_URL,
+    siteName: SITE_NAME,
     title: "KK Borča | Košarkaški klub Borča od 1996. godine",
     description:
-      "Pridružite se jednom od najdugovečnijih košarkaških klubova u Borči. Više od 160 aktivnih članova, stručni treneri i besplatan probni trening.",
+      "Košarkaški klub iz Beograda koji od 1996. godine razvija dečake i devojčice kroz stručni rad, sport, timski duh i zajedništvo.",
     images: [
       {
         url: "/og-image.png",
@@ -89,7 +114,13 @@ export const metadata: Metadata = {
         url: "/favicon.ico",
       },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
   },
 
   manifest: "/site.webmanifest",
@@ -101,12 +132,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sr">
+    <html lang="sr-Latn">
       <body>
         <GoogleAnalytics />
         <OrganizationSchema />
+
         <Navbar />
+
         {children}
+
         <Footer />
       </body>
     </html>

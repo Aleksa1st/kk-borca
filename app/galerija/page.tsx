@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+const SITE_URL = "https://kkborca.rs";
+
 export const metadata: Metadata = {
-  title: {
-    absolute:
-      "Galerija KK Borča | Treninzi, utakmice i istorija kluba",
-  },
+  title: "Galerija – treninzi, utakmice i istorija kluba",
 
   description:
     "Pogledajte fotografije KK Borča kroz tri decenije: prve generacije, treninzi, utakmice, putovanja, uspesi i život kluba od 1996. godine.",
 
   alternates: {
-    canonical: "https://www.kkborca.rs/galerija",
+    canonical: `${SITE_URL}/galerija`,
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs/galerija",
+    url: `${SITE_URL}/galerija`,
     siteName: "KK Borča",
     title: "Galerija KK Borča | Treninzi, utakmice i istorija kluba",
     description:

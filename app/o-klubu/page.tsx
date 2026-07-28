@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+const SITE_URL = "https://kkborca.rs";
+
 export const metadata: Metadata = {
-  title: {
-    absolute: "O klubu | KK Borča – košarkaški klub iz Beograda",
-  },
+  title: "O klubu – košarkaški klub iz Beograda",
 
   description:
     "Upoznajte istoriju KK Borča, košarkaškog kluba iz Beograda koji od 1996. godine razvija dečake i devojčice kroz sport, timski duh i zajedništvo.",
 
   alternates: {
-    canonical: "https://www.kkborca.rs/o-klubu",
+    canonical: `${SITE_URL}/o-klubu`,
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs/o-klubu",
+    url: `${SITE_URL}/o-klubu`,
     siteName: "KK Borča",
     title: "O klubu | KK Borča – košarkaški klub iz Beograda",
     description:

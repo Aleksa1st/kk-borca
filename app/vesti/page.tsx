@@ -6,22 +6,22 @@ import {
   getFeaturedArticle,
 } from "@/lib/news";
 
+const SITE_URL = "https://kkborca.rs";
+
 export const metadata: Metadata = {
-  title: {
-    absolute: "Vesti KK Borča | Utakmice, rezultati i život kluba",
-  },
+  title: "Vesti – utakmice, rezultati i život kluba",
 
   description:
     "Pratite najnovije vesti KK Borča: najave i izveštaje sa utakmica, rezultate, turnire, putovanja i aktivnosti svih selekcija kluba.",
 
   alternates: {
-    canonical: "https://www.kkborca.rs/vesti",
+    canonical: `${SITE_URL}/vesti`,
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs/vesti",
+    url: `${SITE_URL}/vesti`,
     siteName: "KK Borča",
     title: "Vesti KK Borča | Utakmice, rezultati i život kluba",
     description:

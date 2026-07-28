@@ -9,23 +9,22 @@ import {
   Users,
 } from "lucide-react";
 
+const SITE_URL = "https://kkborca.rs";
+
 export const metadata: Metadata = {
-  title: {
-    absolute:
-      "Partneri KK Borča | Postanite partner u razvoju mladih sportista",
-  },
+  title: "Partneri – podržite razvoj mladih sportista",
 
   description:
     "Saznajte kako vaša kompanija može postati partner KK Borča i podržati razvoj više od 160 mladih sportista kroz sport, obrazovanje i zajednicu.",
 
   alternates: {
-    canonical: "https://www.kkborca.rs/partneri",
+    canonical: `${SITE_URL}/partneri`,
   },
 
   openGraph: {
     type: "website",
     locale: "sr_RS",
-    url: "https://www.kkborca.rs/partneri",
+    url: `${SITE_URL}/partneri`,
     siteName: "KK Borča",
     title:
       "Partneri KK Borča | Postanite partner u razvoju mladih sportista",
@@ -203,7 +202,9 @@ export default function PartneriPage() {
 
                   <h3 className="mt-5 text-xl font-black">{area.title}</h3>
 
-                  <p className="mt-3 leading-7 text-slate-600">{area.text}</p>
+                  <p className="mt-3 leading-7 text-slate-600">
+                    {area.text}
+                  </p>
                 </article>
               );
             })}
