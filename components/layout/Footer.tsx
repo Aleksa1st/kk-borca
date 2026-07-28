@@ -7,8 +7,9 @@ const quickLinks = [
   { title: "Početna", href: "/" },
   { title: "O klubu", href: "/o-klubu" },
   { title: "Timovi", href: "/timovi" },
-  { title: "Takmičenja", href: "/takmicenja" },
   { title: "Galerija", href: "/galerija" },
+  { title: "Takmičenja", href: "/takmicenja" },
+  { title: "Vesti", href: "/vesti" },
   { title: "Partneri", href: "/partneri" },
   { title: "Postani član", href: "/postani-clan" },
   { title: "Kontakt", href: "/kontakt" },
@@ -116,12 +117,12 @@ export default function Footer() {
                 <Globe size={20} className="shrink-0 text-yellow-400" />
 
                 <a
-                  href="https://www.kkborca.rs"
+                  href="https://kkborca.rs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-100 transition hover:text-yellow-300"
                 >
-                  www.kkborca.rs
+                  kkborca.rs
                 </a>
               </div>
 
