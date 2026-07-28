@@ -6,10 +6,10 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { title: "O nama", href: "/o-klubu" },
+  { title: "O klubu", href: "/o-klubu" },
   { title: "Timovi", href: "/timovi" },
-  { title: "Život u klubu", href: "/galerija" },
-  { title: "Rezultati", href: "/takmicenja" },
+  { title: "Galerija", href: "/galerija" },
+  { title: "Takmičenja", href: "/takmicenja" },
   { title: "Vesti", href: "/vesti" },
   { title: "Partneri", href: "/partneri" },
   { title: "Kontakt", href: "/kontakt" },
@@ -106,7 +106,7 @@ export default function Navbar() {
             className="hidden rounded-full bg-yellow-400 px-5 py-3 text-sm font-black text-blue-950 shadow-sm transition hover:bg-yellow-300 hover:shadow-md sm:inline-flex lg:px-7"
             onClick={closeMobileMenu}
           >
-            Pridruži se
+            Postani član
           </Link>
 
           <button
@@ -157,7 +157,7 @@ export default function Navbar() {
                 onClick={closeMobileMenu}
                 className="mt-6 rounded-full bg-yellow-400 px-8 py-4 text-center text-base font-black text-blue-950 shadow-md transition hover:bg-yellow-300"
               >
-                Pridruži se treningu
+                Postani član
               </Link>
             </div>
           </div>
