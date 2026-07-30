@@ -53,7 +53,7 @@ const coaches = [
     ],
   },
   {
-    name: "Stefan Dimić",
+    name: "Stefan Dinić",
     role: "Trener",
     image: "/images/home/Dimke.jpg",
     teams: ["Pioniri U15"],
