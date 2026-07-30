@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 const SITE_URL = "https://kkborca.rs";
 
@@ -48,8 +49,8 @@ const season2025 = [
   "Pioniri U15 – Beogradska liga",
   "Kadeti U17 – prvi u grupi 5",
   "Juniori U18 – Beogradska liga",
-  "Pionirke U13 – dva tima u Beogradskoj ligi",
-  "Pionirke U13 – jedan tim 1/4 finale, drugi tim 1/8 finale",
+  "Pionirke U15 – dva tima u Beogradskoj ligi",
+  "Pionirke U15 – jedan tim 1/4 finale, drugi tim 1/8 finale",
 ];
 
 const season2026Boys = [
@@ -188,14 +189,23 @@ export default function TakmicenjaPage() {
               predstavljaju Borču i Srbiju na regionalnoj košarkaškoj sceni.
             </p>
 
-            <a
-              href={wabaArticle}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block rounded-full bg-blue-700 px-8 py-4 font-bold text-white transition hover:bg-blue-800"
-            >
-              Pročitaj zvaničnu WABA objavu ↗
-            </a>
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              <Link
+                href="/vesti/pionirke-waba"
+                className="inline-block rounded-full bg-blue-700 px-8 py-4 text-center font-bold text-white transition hover:bg-blue-800"
+              >
+                Pročitaj više o učešću KK Borča
+              </Link>
+
+              <a
+                href={wabaArticle}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block rounded-full border-2 border-blue-700 px-8 py-4 text-center font-bold text-blue-700 transition hover:bg-blue-700 hover:text-white"
+              >
+                Zvanična WABA objava ↗
+              </a>
+            </div>
           </div>
 
           <div className="rounded-3xl bg-white p-8 shadow-xl">

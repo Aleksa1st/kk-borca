@@ -109,13 +109,21 @@ export default function VestiPage() {
                         Izdvajamo
                       </p>
 
-                      <span className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-blue-100">
+                      <time
+                        dateTime={featuredArticle.date}
+                        className="rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-blue-100"
+                      >
                         {featuredArticle.displayDate}
-                      </span>
+                      </time>
                     </div>
 
                     <h2 className="mt-5 text-3xl font-black leading-tight md:text-4xl">
-                      {featuredArticle.title}
+                      <Link
+                        href={`/vesti/${featuredArticle.slug}`}
+                        className="transition hover:text-yellow-300"
+                      >
+                        {featuredArticle.title}
+                      </Link>
                     </h2>
 
                     <p className="mt-6 text-lg leading-8 text-blue-100">
@@ -167,13 +175,21 @@ export default function VestiPage() {
                           {article.category}
                         </p>
 
-                        <p className="text-sm font-semibold text-slate-500">
+                        <time
+                          dateTime={article.date}
+                          className="text-sm font-semibold text-slate-500"
+                        >
                           {article.displayDate}
-                        </p>
+                        </time>
                       </div>
 
                       <h2 className="mt-4 text-2xl font-black leading-tight text-blue-950">
-                        {article.title}
+                        <Link
+                          href={`/vesti/${article.slug}`}
+                          className="transition hover:text-blue-700"
+                        >
+                          {article.title}
+                        </Link>
                       </h2>
 
                       <p className="mt-4 leading-7 text-slate-600">

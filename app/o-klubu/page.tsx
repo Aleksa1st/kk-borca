@@ -163,7 +163,7 @@ export default function OKlubuPage() {
           </p>
 
           <h2 className="mt-4 max-w-4xl text-4xl font-black md:text-5xl">
-            Od prve generacije do današnje akademije.
+            Od prve generacije do današnjih selekcija.
           </h2>
 
           <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">

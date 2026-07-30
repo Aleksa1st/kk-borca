@@ -11,7 +11,7 @@ import {
 
 const SITE_URL = "https://kkborca.rs";
 const SITE_NAME = "KK Borča";
-const DEFAULT_OG_IMAGE = `${SITE_URL}/images/kk-borca-og.jpg`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 const ORGANIZATION_LOGO = `${SITE_URL}/logo.png`;
 
 type ArticlePageProps = {
@@ -44,6 +44,7 @@ export async function generateMetadata({
   }
 
   const articleUrl = `${SITE_URL}/vesti/${slug}`;
+
   const imageUrl = article.image
     ? new URL(article.image, SITE_URL).toString()
     : DEFAULT_OG_IMAGE;
@@ -146,8 +147,8 @@ export default async function ArticlePage({
 
     image: [imageUrl],
 
-    datePublished: article.date,
-    dateModified: article.date,
+    datePublished: `${article.date}T12:00:00+02:00`,
+    dateModified: `${article.date}T12:00:00+02:00`,
 
     inLanguage: "sr-Latn-RS",
 

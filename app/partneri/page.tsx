@@ -58,7 +58,7 @@ const partnershipBenefits = [
   {
     icon: MapPin,
     title: "Snažna lokalna zajednica",
-    text: "KK Borča je gotovo tri decenije deo Borče i mesto okupljanja dece, roditelja i prijatelja sporta.",
+    text: "KK Borča je već 30 godna deo Borče i mesto okupljanja dece, roditelja i prijatelja sporta.",
   },
   {
     icon: Trophy,
