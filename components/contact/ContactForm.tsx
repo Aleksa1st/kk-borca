@@ -30,9 +30,35 @@ type TurnstileInstance = {
   remove: (widgetId?: string) => void;
 };
 
+type GtagFunction = (
+  command: "event",
+  eventName: string,
+  eventParameters?: Record<string, string | number | boolean>
+) => void;
+
 declare global {
   interface Window {
     turnstile?: TurnstileInstance;
+    gtag?: GtagFunction;
+  }
+}
+
+function getEnquiryType(enquiry: string) {
+  switch (enquiry) {
+    case "Probni trening":
+      return "probni_trening";
+
+    case "Članstvo":
+      return "clanstvo";
+
+    case "Partnerstvo":
+      return "partnerstvo";
+
+    case "Mediji":
+      return "mediji";
+
+    default:
+      return "ostalo";
   }
 }
 
@@ -101,6 +127,18 @@ export default function ContactForm() {
     }
   }
 
+  function trackSuccessfulLead(enquiry: string) {
+    if (typeof window === "undefined" || typeof window.gtag !== "function") {
+      return;
+    }
+
+    window.gtag("event", "generate_lead", {
+      enquiry_type: getEnquiryType(enquiry),
+      form_name: "kontakt_forma",
+      page_location: window.location.href,
+    });
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -151,6 +189,8 @@ export default function ContactForm() {
           result.error || "Poruka trenutno nije mogla biti poslata."
         );
       }
+
+      trackSuccessfulLead(payload.enquiry);
 
       setStatus("success");
       setStatusMessage(
