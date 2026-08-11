@@ -253,63 +253,94 @@ export default function TimoviPage() {
           </div>
 
           <div className="mt-14 grid gap-8 lg:grid-cols-2">
-            <article className="rounded-3xl bg-white p-8 shadow-lg">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-700">
-                Dečaci
-              </p>
+            <article className="overflow-hidden rounded-3xl bg-white shadow-lg">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/images/home/pioniri.jpeg"
+                  alt="Pioniri KK Borča"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
 
-              <h3 className="mt-4 text-3xl font-black text-blue-950">
-                Muške selekcije
-              </h3>
+              <div className="p-8">
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-700">
+                  Dečaci
+                </p>
 
-              <ul className="mt-7 space-y-4">
-                <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                  Razvojna grupa 1
-                </li>
-                <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                  Razvojna grupa 2
-                </li>
-                <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                  Mlađi pioniri U13
-                </li>
-                <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                  Pioniri U15
-                </li>
-                <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                  Kadeti U17
-                </li>
-                <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                  Juniori U18
-                </li>
-              </ul>
+                <h3 className="mt-4 text-3xl font-black text-blue-950">
+                  Muške selekcije
+                </h3>
+
+                <ul className="mt-7 space-y-4">
+                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
+                    Razvojna grupa 1
+                  </li>
+
+                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
+                    Razvojna grupa 2
+                  </li>
+
+                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
+                    Mlađi pioniri U13
+                  </li>
+
+                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
+                    Pioniri U15
+                  </li>
+
+                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
+                    Kadeti U17
+                  </li>
+
+                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
+                    Juniori U18
+                  </li>
+                </ul>
+              </div>
             </article>
 
-            <article className="rounded-3xl bg-blue-700 p-8 text-white shadow-xl">
-              <p className="text-sm font-black uppercase tracking-[0.2em] text-yellow-300">
-                Devojčice
-              </p>
+            <article className="overflow-hidden rounded-3xl bg-blue-700 text-white shadow-xl">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/images/home/pionirke.jpeg"
+                  alt="Pionirke KK Borča"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover"
+                />
+              </div>
 
-              <h3 className="mt-4 text-3xl font-black">
-                Ženske selekcije
-              </h3>
+              <div className="p-8">
+                <p className="text-sm font-black uppercase tracking-[0.2em] text-yellow-300">
+                  Devojčice
+                </p>
 
-              <ul className="mt-7 space-y-4">
-                <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
-                  Mlađe pionirke U13
-                </li>
-                <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
-                  Pionirke U15
-                </li>
-                <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
-                  Kadetkinje U17
-                </li>
-              </ul>
+                <h3 className="mt-4 text-3xl font-black">
+                  Ženske selekcije
+                </h3>
 
-              <p className="mt-8 leading-8 text-blue-100">
-                Ženske selekcije KK Borča nastupaju u beogradskim
-                takmičenjima, dok pionirke U15 učestvuju i u regionalnoj WABA
-                ligi.
-              </p>
+                <ul className="mt-7 space-y-4">
+                  <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
+                    Mlađe pionirke U13
+                  </li>
+
+                  <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
+                    Pionirke U15
+                  </li>
+
+                  <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
+                    Kadetkinje U17
+                  </li>
+                </ul>
+
+                <p className="mt-8 leading-8 text-blue-100">
+                  Ženske selekcije KK Borča nastupaju u beogradskim
+                  takmičenjima, dok pionirke U15 učestvuju i u regionalnoj WABA
+                  ligi.
+                </p>
+              </div>
             </article>
           </div>
         </div>
