@@ -201,7 +201,7 @@ export default async function ArticlePage({
     ],
   };
 
-  const isWabaU15Article = slug === "pionirke-waba-u15-2026";
+  const isWabaU15Article = slug === "pionirke-pocinju-waba-u15-2026";
 
   return (
     <main>
