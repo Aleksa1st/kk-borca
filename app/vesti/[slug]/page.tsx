@@ -103,8 +103,6 @@ export async function generateMetadata({
       images: [
         {
           url: imageUrl,
-          width: 1200,
-          height: 630,
           alt: `${article.title} – KK Borča`,
         },
       ],
@@ -203,6 +201,8 @@ export default async function ArticlePage({
     ],
   };
 
+  const isWabaU15Article = slug === "pionirke-waba-u15-2026";
+
   return (
     <main>
       <script
@@ -292,16 +292,30 @@ export default async function ArticlePage({
 
       <section className="bg-white px-6 py-16">
         <article className="mx-auto max-w-5xl">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-3xl bg-slate-200 shadow-2xl">
-            <Image
-              src={article.image}
-              alt={`${article.title} – KK Borča`}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 1024px"
-              className="object-cover"
-            />
-          </div>
+          {isWabaU15Article ? (
+            <div className="overflow-hidden rounded-3xl bg-slate-200 shadow-2xl">
+              <Image
+                src={article.image}
+                alt={`${article.title} – KK Borča`}
+                width={1118}
+                height={933}
+                priority
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="h-auto w-full"
+              />
+            </div>
+          ) : (
+            <div className="relative aspect-[16/9] overflow-hidden rounded-3xl bg-slate-200 shadow-2xl">
+              <Image
+                src={article.image}
+                alt={`${article.title} – KK Borča`}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-cover"
+              />
+            </div>
+          )}
 
           <div className="mx-auto max-w-3xl py-12">
             <MDXRemote
