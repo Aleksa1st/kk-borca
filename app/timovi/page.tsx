@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import TeamPhotoLink from "@/components/teams/TeamPhotoLink";
 
 const SITE_URL = "https://kkborca.rs";
 
@@ -73,6 +74,45 @@ const coaches = [
     role: "Trener",
     image: "/images/home/pepa.jpg",
     teams: ["Kadeti U17", "Juniori U18"],
+  },
+];
+
+const boysTeams = [
+  {
+    name: "Razvojna grupa 1",
+  },
+  {
+    name: "Razvojna grupa 2",
+  },
+  {
+    name: "Mlađi pioniri U13",
+  },
+  {
+    name: "Pioniri U15",
+  },
+  {
+    name: "Kadeti U17",
+  },
+  {
+    name: "Juniori U18",
+  },
+];
+
+const girlsTeams = [
+  {
+    name: "Mlađe pionirke U13",
+  },
+  {
+    name: "Pionirke U15",
+    image: "/images/home/pionirke-waba-u15-2026.webp",
+    imageWidth: 1118,
+    imageHeight: 933,
+  },
+  {
+    name: "Kadetkinje U17",
+    image: "/images/home/kadetkinje-2026-27.webp",
+    imageWidth: 855,
+    imageHeight: 1455,
   },
 ];
 
@@ -250,14 +290,19 @@ export default function TimoviPage() {
             <h2 className="mt-4 text-4xl font-black text-blue-950 md:text-5xl">
               Razvoj od prvog treninga do juniorske košarke.
             </h2>
+
+            <p className="mt-6 text-lg leading-8 text-slate-600">
+              Izaberite selekciju sa oznakom fotografije da pogledate aktuelnu
+              ekipu za sezonu 2026/27.
+            </p>
           </div>
 
-          <div className="mt-14 grid gap-8 lg:grid-cols-2">
+          <div className="mt-14 grid items-start gap-8 lg:grid-cols-2">
             <article className="overflow-hidden rounded-3xl bg-white shadow-lg">
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src="/images/home/pioniri.jpeg"
-                  alt="Pioniri KK Borča"
+                  alt="Muške selekcije KK Borča"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -274,29 +319,14 @@ export default function TimoviPage() {
                 </h3>
 
                 <ul className="mt-7 space-y-4">
-                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                    Razvojna grupa 1
-                  </li>
-
-                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                    Razvojna grupa 2
-                  </li>
-
-                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                    Mlađi pioniri U13
-                  </li>
-
-                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                    Pioniri U15
-                  </li>
-
-                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                    Kadeti U17
-                  </li>
-
-                  <li className="rounded-2xl bg-slate-100 px-5 py-4 font-bold text-blue-950">
-                    Juniori U18
-                  </li>
+                  {boysTeams.map((team) => (
+                    <li key={team.name}>
+                      <TeamPhotoLink
+                        name={team.name}
+                        variant="light"
+                      />
+                    </li>
+                  ))}
                 </ul>
               </div>
             </article>
@@ -305,7 +335,7 @@ export default function TimoviPage() {
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
                   src="/images/home/pionirke.jpeg"
-                  alt="Pionirke KK Borča"
+                  alt="Ženske selekcije KK Borča"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -322,17 +352,18 @@ export default function TimoviPage() {
                 </h3>
 
                 <ul className="mt-7 space-y-4">
-                  <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
-                    Mlađe pionirke U13
-                  </li>
-
-                  <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
-                    Pionirke U15
-                  </li>
-
-                  <li className="rounded-2xl bg-white/10 px-5 py-4 font-bold">
-                    Kadetkinje U17
-                  </li>
+                  {girlsTeams.map((team) => (
+                    <li key={team.name}>
+                      <TeamPhotoLink
+                        name={team.name}
+                        image={team.image}
+                        imageWidth={team.imageWidth}
+                        imageHeight={team.imageHeight}
+                        season="2026/27"
+                        variant="dark"
+                      />
+                    </li>
+                  ))}
                 </ul>
 
                 <p className="mt-8 leading-8 text-blue-100">
