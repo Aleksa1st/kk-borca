@@ -90,18 +90,22 @@ export default function VestiPage() {
             <>
               {featuredArticle && (
                 <article className="grid overflow-hidden rounded-3xl bg-blue-700 text-white shadow-2xl lg:grid-cols-2">
-                  <div className="relative min-h-[380px]">
+                  <a
+                    href={`/vesti/${featuredArticle.slug}`}
+                    className="group relative block min-h-[380px] overflow-hidden"
+                    aria-label={`Pročitaj vest: ${featuredArticle.title}`}
+                  >
                     <Image
                       src={featuredArticle.image}
                       alt={featuredArticle.title}
                       fill
                       priority
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover"
+                      className="object-cover transition duration-700 group-hover:scale-105"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-950/40 to-transparent" />
-                  </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-950/40 to-transparent transition group-hover:from-blue-950/55" />
+                  </a>
 
                   <div className="flex flex-col justify-center p-8 md:p-12">
                     <div className="flex flex-wrap items-center gap-4">
@@ -118,12 +122,12 @@ export default function VestiPage() {
                     </div>
 
                     <h2 className="mt-5 text-3xl font-black leading-tight md:text-4xl">
-                      <Link
+                      <a
                         href={`/vesti/${featuredArticle.slug}`}
                         className="transition hover:text-yellow-300"
                       >
                         {featuredArticle.title}
-                      </Link>
+                      </a>
                     </h2>
 
                     <p className="mt-6 text-lg leading-8 text-blue-100">
@@ -131,12 +135,12 @@ export default function VestiPage() {
                     </p>
 
                     <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                      <Link
+                      <a
                         href={`/vesti/${featuredArticle.slug}`}
                         className="rounded-full bg-yellow-400 px-7 py-4 text-center font-black text-blue-950 transition hover:bg-yellow-300"
                       >
                         Pročitaj vest
-                      </Link>
+                      </a>
 
                       {featuredArticle.externalUrl && (
                         <a
@@ -145,7 +149,7 @@ export default function VestiPage() {
                           rel="noopener noreferrer"
                           className="rounded-full border-2 border-white px-7 py-4 text-center font-bold text-white transition hover:bg-white hover:text-blue-700"
                         >
-                          Zvanični izvor ↗
+                          Zvanični izvor →
                         </a>
                       )}
                     </div>
@@ -159,15 +163,21 @@ export default function VestiPage() {
                     key={article.slug}
                     className="group overflow-hidden rounded-3xl border border-slate-200 bg-slate-50 shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
                   >
-                    <div className="relative h-64 overflow-hidden">
-                      <Image
-                        src={article.image}
-                        alt={article.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transition duration-700 group-hover:scale-105"
-                      />
-                    </div>
+                    <a
+                      href={`/vesti/${article.slug}`}
+                      className="block"
+                      aria-label={`Pročitaj vest: ${article.title}`}
+                    >
+                      <div className="relative h-64 overflow-hidden">
+                        <Image
+                          src={article.image}
+                          alt={article.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          className="object-cover transition duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                    </a>
 
                     <div className="p-7">
                       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -184,24 +194,24 @@ export default function VestiPage() {
                       </div>
 
                       <h2 className="mt-4 text-2xl font-black leading-tight text-blue-950">
-                        <Link
+                        <a
                           href={`/vesti/${article.slug}`}
                           className="transition hover:text-blue-700"
                         >
                           {article.title}
-                        </Link>
+                        </a>
                       </h2>
 
                       <p className="mt-4 leading-7 text-slate-600">
                         {article.excerpt}
                       </p>
 
-                      <Link
+                      <a
                         href={`/vesti/${article.slug}`}
                         className="mt-6 inline-flex font-black text-blue-700 transition hover:text-blue-900"
                       >
                         Pročitaj vest →
-                      </Link>
+                      </a>
                     </div>
                   </article>
                 ))}
@@ -221,6 +231,13 @@ export default function VestiPage() {
             Tokom sezone objavljivaćemo najave utakmica, rezultate,
             izveštaje, fotografije i informacije iz svih selekcija kluba.
           </p>
+
+          <Link
+            href="/vesti"
+            className="sr-only"
+          >
+            Sve vesti
+          </Link>
         </div>
       </section>
     </main>
