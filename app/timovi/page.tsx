@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Timovi i škola košarke za decu u Borči",
 
   description:
-    "Upoznajte razvojne i takmičarske selekcije KK Borča za dečake i devojčice od 6 do 18 godina, kao i trenere koji vode naše ekipe.",
+    "Upoznajte razvojne i takmičarske selekcije KK Borča za dečake i devojčice, od prvih košarkaških koraka do seniorske košarke, kao i trenere koji vode naše ekipe.",
 
   alternates: {
     canonical: `${SITE_URL}/timovi`,
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "KK Borča",
     title: "Timovi i škola košarke za decu u Borči | KK Borča",
     description:
-      "Upoznajte razvojne i takmičarske selekcije KK Borča za dečake i devojčice od 6 do 18 godina, kao i trenere koji vode naše ekipe.",
+      "Upoznajte razvojne i takmičarske selekcije KK Borča i trenere koji vode naše ekipe.",
     images: [
       {
         url: "/og-image.png",
@@ -73,7 +73,7 @@ const coaches = [
     name: "Stefan Milenković",
     role: "Trener",
     image: "/images/home/pepa.jpg",
-    teams: ["Kadeti U17", "Juniori U18"],
+    teams: ["Kadeti U17", "Seniori"],
   },
 ];
 
@@ -94,7 +94,10 @@ const boysTeams = [
     name: "Kadeti U17",
   },
   {
-    name: "Juniori U18",
+    name: "Seniori",
+    image: "/images/home/Seniori.jpg",
+    imageWidth: 1280,
+    imageHeight: 854,
   },
 ];
 
@@ -130,7 +133,7 @@ export default function TimoviPage() {
           </h1>
 
           <p className="mt-8 max-w-3xl text-xl leading-9 text-blue-100">
-            Od prvih košarkaških koraka do juniorskog uzrasta, naše selekcije
+            Od prvih košarkaških koraka do seniorske košarke, naše selekcije
             vode treneri koji prate razvoj svakog deteta kroz rad, disciplinu,
             igru i zajedništvo.
           </p>
@@ -288,7 +291,7 @@ export default function TimoviPage() {
             </p>
 
             <h2 className="mt-4 text-4xl font-black text-blue-950 md:text-5xl">
-              Razvoj od prvog treninga do juniorske košarke.
+              Razvoj od prvog treninga do seniorske košarke.
             </h2>
 
             <p className="mt-6 text-lg leading-8 text-slate-600">
@@ -323,6 +326,10 @@ export default function TimoviPage() {
                     <li key={team.name}>
                       <TeamPhotoLink
                         name={team.name}
+                        image={team.image}
+                        imageWidth={team.imageWidth}
+                        imageHeight={team.imageHeight}
+                        season="2026/27"
                         variant="light"
                       />
                     </li>

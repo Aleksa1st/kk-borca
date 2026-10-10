@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Camera, X } from "lucide-react";
 
@@ -40,12 +41,12 @@ export default function TeamPhotoLink({
 
     const previousOverflow = document.body.style.overflow;
 
-    document.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
 
@@ -72,7 +73,10 @@ export default function TeamPhotoLink({
               : "flex shrink-0 items-center gap-2 text-sm font-black text-blue-700"
           }
         >
-          <Camera className="h-4 w-4" aria-hidden="true" />
+          <Camera
+            className="h-4 w-4"
+            aria-hidden="true"
+          />
 
           <span className="hidden sm:inline">
             Pogledaj ekipu
@@ -82,7 +86,7 @@ export default function TeamPhotoLink({
     </>
   );
 
-  if (!hasPhoto) {
+  if (!hasPhoto || !image || !imageWidth || !imageHeight) {
     return (
       <div
         className={`${baseClasses} ${
@@ -93,6 +97,10 @@ export default function TeamPhotoLink({
       </div>
     );
   }
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -109,51 +117,55 @@ export default function TeamPhotoLink({
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/90 p-3 sm:p-5 md:p-8"
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-slate-950/90 p-2 backdrop-blur-sm sm:p-4 md:p-8"
           role="dialog"
           aria-modal="true"
-          aria-label={`${name}, sezona ${season}`}
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              setIsOpen(false);
-            }
-          }}
+          aria-label={`${name} – sezona ${season}`}
+          onClick={closeModal}
         >
-          <div className="grid h-[94vh] w-full max-w-6xl grid-rows-[auto_1fr] overflow-hidden rounded-3xl bg-white shadow-2xl">
+          <div
+            className="relative flex h-[96vh] max-h-[96vh] w-full max-w-6xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl sm:h-[94vh] sm:rounded-3xl"
+            onClick={(event) => {
+              event.stopPropagation();
+            }}
+          >
             {/* HEADER */}
-            <header className="flex min-h-[76px] items-center justify-between border-b border-slate-200 bg-white px-4 py-4 sm:px-6 md:px-7">
-              <div className="min-w-0 pr-4">
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-700 sm:text-xs">
+            <div className="relative z-20 flex shrink-0 items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3 sm:px-7 sm:py-5">
+              <div className="min-w-0 pr-2">
+                <p className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-700 sm:text-xs">
                   KK Borča · sezona {season}
                 </p>
 
-                <h3 className="mt-1 text-lg font-black text-blue-950 sm:text-xl md:text-2xl">
+                <h2 className="mt-1 truncate text-lg font-black text-blue-950 sm:text-2xl md:text-3xl">
                   {name}
-                </h3>
+                </h2>
               </div>
 
+              {/* X DUGME – DESKTOP + MOBILNI */}
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-950 text-white shadow-md transition hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-300"
+                onClick={closeModal}
+                className="z-50 flex h-12 w-12 shrink-0 touch-manipulation items-center justify-center rounded-full bg-blue-950 text-white shadow-lg transition active:scale-95 hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
                 aria-label="Zatvori fotografiju"
               >
                 <X
-                  className="h-6 w-6"
+                  className="h-7 w-7"
                   strokeWidth={3}
                   aria-hidden="true"
                 />
               </button>
-            </header>
+            </div>
 
-            {/* IMAGE AREA */}
-            <div className="flex min-h-0 items-center justify-center overflow-hidden bg-slate-100 p-2 sm:p-4 md:p-6">
-              <img
+            {/* FOTOGRAFIJA */}
+            <div className="flex min-h-0 flex-1 items-center justify-center overflow-hidden bg-slate-100 p-2 sm:p-5 md:p-7">
+              <Image
                 src={image}
-                alt={`${name} KK Borča – sezona ${season}`}
+                alt={`${name} – KK Borča – sezona ${season}`}
                 width={imageWidth}
                 height={imageHeight}
-                className="block max-h-full max-w-full rounded-2xl object-contain shadow-lg"
+                sizes="(max-width: 640px) 96vw, (max-width: 1024px) 90vw, 1152px"
+                className="block max-h-full max-w-full rounded-xl object-contain shadow-xl sm:rounded-2xl"
+                priority
               />
             </div>
           </div>
