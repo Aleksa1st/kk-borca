@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import CompetitionCard from "@/components/competitions/CompetitionCard";
-import { getActiveCompetitions } from "@/data/competitions";
+import { getCurrentCompetitions } from "@/data/competitions";
 
 const SITE_URL = "https://kkborca.rs";
 
@@ -52,7 +52,7 @@ const season2025 = [
 ];
 
 export default function TakmicenjaPage() {
-  const activeCompetitions = getActiveCompetitions();
+  const currentCompetitions = getCurrentCompetitions();
 
   return (
     <main>
@@ -87,13 +87,14 @@ export default function TakmicenjaPage() {
 
           <p className="mt-6 max-w-3xl text-xl leading-9 text-slate-600">
             Na jednom mestu pratite takmičenja u kojima KK Borča trenutno
-            učestvuje. Za tabelu, rezultate i zvanični raspored svakog
-            takmičenja koristite direktan link ka organizatoru.
+            učestvuje, kao i lige koje uskoro počinju. Za tabelu, rezultate
+            i zvanični raspored svakog takmičenja koristite direktan link
+            ka organizatoru.
           </p>
 
-          {activeCompetitions.length > 0 ? (
+          {currentCompetitions.length > 0 ? (
             <div className="mt-14 grid gap-8 lg:grid-cols-2">
-              {activeCompetitions.map((competition) => (
+              {currentCompetitions.map((competition) => (
                 <CompetitionCard
                   key={competition.id}
                   competition={competition}

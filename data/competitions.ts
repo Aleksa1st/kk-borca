@@ -19,6 +19,8 @@ export type Competition = {
   officialUrl?: string;
 
   description?: string;
+
+  startDate?: string;
 };
 
 export const competitions: Competition[] = [
@@ -54,16 +56,62 @@ export const competitions: Competition[] = [
     status: "active",
 
     officialUrl:
-       "https://waba-league.com/season/standings/?leagueId=32033",
+      "https://waba-league.com/season/standings/?leagueId=32033",
 
     description:
       "Pionirke KK Borča takmiče se u WABA U15 ligi u sezoni 2026/27.",
+  },
+
+  {
+    id: "pionirke-u15-kvalitetna-beogradska-liga-2026-27",
+    team: "Pionirke U15",
+    teamCategory: "Pionirke",
+    competition: "Kvalitetna beogradska liga",
+    season: "2026/27",
+    status: "upcoming",
+
+    officialUrl: "https://www.ksb.rs/takmicenje1218/",
+
+    description:
+      "Pionirke KK Borča se u sezoni 2026/27, pored WABA U15 lige, takmiče i u Kvalitetnoj beogradskoj ligi.",
+    
+    startDate: "Kraj oktobra 2026.",
+  },
+
+  {
+    id: "kadetkinje-u17-beogradska-liga-2026-27",
+    team: "Kadetkinje U17",
+    teamCategory: "Kadetkinje U17",
+    competition: "Beogradska liga",
+    season: "2026/27",
+    status: "upcoming",
+
+    officialUrl: "https://www.ksb.rs/takmicenje1221/",
+
+    description:
+      "Kadetkinje U17 KK Borča takmiče se u Beogradskoj ligi u sezoni 2026/27.",
+
+    startDate: "Kraj oktobra 2026.",
   },
 ];
 
 export function getActiveCompetitions(): Competition[] {
   return competitions.filter(
     (competition) => competition.status === "active"
+  );
+}
+
+export function getUpcomingCompetitions(): Competition[] {
+  return competitions.filter(
+    (competition) => competition.status === "upcoming"
+  );
+}
+
+export function getCurrentCompetitions(): Competition[] {
+  return competitions.filter(
+    (competition) =>
+      competition.status === "active" ||
+      competition.status === "upcoming"
   );
 }
 

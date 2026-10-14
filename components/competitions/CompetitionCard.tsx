@@ -1,4 +1,8 @@
-import { CalendarDays, ExternalLink, MapPin } from "lucide-react";
+import {
+  CalendarDays,
+  ExternalLink,
+  MapPin,
+} from "lucide-react";
 import type { Competition } from "@/data/competitions";
 
 type CompetitionCardProps = {
@@ -10,8 +14,12 @@ export default function CompetitionCard({
 }: CompetitionCardProps) {
   const { nextGame } = competition;
 
+  const isActive = competition.status === "active";
+  const isUpcoming = competition.status === "upcoming";
+
   return (
     <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+      {/* HEADER */}
       <div className="bg-blue-950 px-7 py-6 text-white md:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -30,10 +38,25 @@ export default function CompetitionCard({
         </div>
       </div>
 
+      {/* CONTENT */}
       <div className="p-7 md:p-8">
-        <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-700">
-          Takmičenje
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm font-black uppercase tracking-[0.2em] text-blue-700">
+            Takmičenje
+          </p>
+
+          {isActive && (
+            <span className="rounded-full bg-green-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-green-700">
+              Takmičenje u toku
+            </span>
+          )}
+
+          {isUpcoming && (
+            <span className="rounded-full bg-yellow-100 px-4 py-2 text-xs font-black uppercase tracking-wide text-yellow-700">
+              Uskoro počinje
+            </span>
+          )}
+        </div>
 
         <h3 className="mt-2 text-2xl font-black text-blue-950">
           {competition.competition}
@@ -45,6 +68,25 @@ export default function CompetitionCard({
           </p>
         )}
 
+        {/* UPCOMING */}
+        {isUpcoming && (
+          <div className="mt-7 rounded-2xl bg-slate-100 p-5">
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-blue-700">
+              Početak sezone
+            </p>
+
+            <p className="mt-3 text-xl font-black text-blue-950">
+              {competition.startDate ?? "Uskoro"}
+            </p>
+
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Raspored i rezultati biće dostupni na zvaničnoj stranici
+              takmičenja kada liga počne.
+            </p>
+          </div>
+        )}
+
+        {/* NEXT GAME */}
         {nextGame && (
           <div className="mt-7 rounded-2xl bg-slate-100 p-5">
             <p className="text-sm font-black uppercase tracking-[0.18em] text-blue-700">
@@ -81,6 +123,7 @@ export default function CompetitionCard({
           </div>
         )}
 
+        {/* OFFICIAL LINK */}
         <div className="mt-7">
           {competition.officialUrl && (
             <a
