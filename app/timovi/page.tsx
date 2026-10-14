@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+
 import Image from "next/image";
+
 import Link from "next/link";
+
 import TeamPhotoLink from "@/components/teams/TeamPhotoLink";
 
 const SITE_URL = "https://kkborca.rs";
@@ -92,6 +95,9 @@ const boysTeams = [
   },
   {
     name: "Kadeti U17",
+    image: "/images/home/kadeti.jpg",
+    imageWidth: 1280,
+    imageHeight: 853,
   },
   {
     name: "Seniori",
