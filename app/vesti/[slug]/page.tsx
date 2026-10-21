@@ -201,8 +201,10 @@ export default async function ArticlePage({
     ],
   };
 
-  const isWabaU15Article = slug === "pionirke-pocinju-waba-u15-2026" ||
-  slug === "pionirke-waba-u15-prvi-prozor-banja-luka-2026";
+  const isFullImageArticle =
+    slug === "pionirke-pocinju-waba-u15-2026" ||
+    slug === "pionirke-waba-u15-prvi-prozor-banja-luka-2026" ||
+    slug === "kadetkinje-otvaraju-sezonu-protiv-zkk-radnicki-2026";
 
   return (
     <main>
@@ -293,7 +295,7 @@ export default async function ArticlePage({
 
       <section className="bg-white px-6 py-16">
         <article className="mx-auto max-w-5xl">
-          {isWabaU15Article ? (
+          {isFullImageArticle ? (
             <div className="overflow-hidden rounded-3xl bg-slate-200 shadow-2xl">
               <Image
                 src={article.image}
