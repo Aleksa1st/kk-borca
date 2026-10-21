@@ -204,7 +204,8 @@ export default async function ArticlePage({
   const isFullImageArticle =
     slug === "pionirke-pocinju-waba-u15-2026" ||
     slug === "pionirke-waba-u15-prvi-prozor-banja-luka-2026" ||
-    slug === "kadetkinje-otvaraju-sezonu-protiv-zkk-radnicki-2026";
+    slug === "kadetkinje-otvaraju-sezonu-protiv-zkk-radnicki-2026" ||
+    slug === "kk-borca-cerak-trece-kolo-2026";
 
   return (
     <main>
