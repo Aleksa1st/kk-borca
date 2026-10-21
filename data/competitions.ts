@@ -60,9 +60,17 @@ const competitions: Competition[] = [
     team: "Pionirke U15",
     season: "2026/27",
     competition: "Kvalitetna beogradska liga",
-    status: "active",
+    status: "upcoming",
+    startDate: "31. oktobar 2026.",
     description:
       "Pionirke KK Borča takmiče se i u Kvalitetnoj beogradskoj ligi u sezoni 2026/27.",
+    nextGame: {
+      homeTeam: "ŽKK Vizura",
+      awayTeam: "KK Borča",
+      date: "31.10.2026.",
+      time: "Vreme još nije određeno",
+      venue: "Car Dušana 105, Zemun",
+    },
     officialUrl: "https://www.ksb.rs/takmicenje1218/",
   },
 
@@ -91,7 +99,8 @@ const competitions: Competition[] = [
     teamCategory: "Kadeti",
     team: "Kadeti U17",
     season: "2026/27",
-    competition: "Kvalifikacije za Kvalitetnu ligu Beograda – Grupa 5",
+    competition:
+      "Kvalifikacije za Kvalitetnu ligu Beograda – Grupa 5",
     status: "upcoming",
     startDate: "24. oktobar 2026.",
     description:
