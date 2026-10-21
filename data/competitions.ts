@@ -1,124 +1,128 @@
-export type Competition = {
-  id: string;
-  team: string;
-  teamCategory: string;
-  competition: string;
-  season: string;
+export type CompetitionStatus = "active" | "upcoming";
 
-  status: "active" | "completed" | "upcoming";
-
-  nextGame?: {
-    opponent: string;
-    date: string;
-    time: string;
-    venue: string;
-    homeTeam: string;
-    awayTeam: string;
-  };
-
-  officialUrl?: string;
-
-  description?: string;
-
-  startDate?: string;
+export type NextGame = {
+  homeTeam: string;
+  awayTeam: string;
+  date: string;
+  time: string;
+  venue: string;
 };
 
-export const competitions: Competition[] = [
+export type Competition = {
+  id: string;
+  teamCategory: string;
+  team: string;
+  season: string;
+  competition: string;
+  status: CompetitionStatus;
+  description?: string;
+  startDate?: string;
+  nextGame?: NextGame;
+  officialUrl?: string;
+};
+
+const competitions: Competition[] = [
   {
     id: "seniori-2-mrl-centar-2026-27",
-    team: "Seniori",
     teamCategory: "Seniori",
-    competition: "2. MRL Centar",
+    team: "Seniori",
     season: "2026/27",
+    competition: "2. MRL Centar",
     status: "active",
-
-    nextGame: {
-      opponent: "KK Grocka",
-      date: "11. oktobar 2026.",
-      time: "19:30",
-      venue: "Hala Padinska Skela",
-      homeTeam: "KK Borča",
-      awayTeam: "KK Grocka",
-    },
-
-    officialUrl: "https://www.ksb.rs/takmicenje1210/",
-
     description:
       "Seniorska ekipa KK Borča takmiči se u 2. MRL Centar u sezoni 2026/27.",
+    nextGame: {
+      homeTeam: "KK Borča",
+      awayTeam: "KK Cerak",
+      date: "24.10.2026.",
+      time: "17:30",
+      venue: "Hala Padinska Skela",
+    },
+    officialUrl: "https://www.ksb.rs/takmicenje1210/",
   },
 
   {
     id: "pionirke-u15-waba-2026-27",
-    team: "Pionirke U15",
     teamCategory: "Pionirke",
-    competition: "WABA U15",
+    team: "Pionirke U15",
     season: "2026/27",
+    competition: "WABA U15",
     status: "active",
-
-    officialUrl:
-      "https://waba-league.com/season/standings/?leagueId=32033",
-
     description:
       "Pionirke KK Borča takmiče se u WABA U15 ligi u sezoni 2026/27.",
+    officialUrl:
+      "https://waba-league.com/season/standings/?leagueId=32033",
   },
 
   {
-    id: "pionirke-u15-kvalitetna-beogradska-liga-2026-27",
-    team: "Pionirke U15",
+    id: "pionirke-u15-kvalitetna-beogradska-2026-27",
     teamCategory: "Pionirke",
-    competition: "Kvalitetna beogradska liga",
+    team: "Pionirke U15",
     season: "2026/27",
-    status: "upcoming",
-
-    officialUrl: "https://www.ksb.rs/takmicenje1218/",
-
+    competition: "Kvalitetna beogradska liga",
+    status: "active",
     description:
-      "Pionirke KK Borča se u sezoni 2026/27, pored WABA U15 lige, takmiče i u Kvalitetnoj beogradskoj ligi.",
-    
-    startDate: "Kraj oktobra 2026.",
+      "Pionirke KK Borča takmiče se i u Kvalitetnoj beogradskoj ligi u sezoni 2026/27.",
+    officialUrl: "https://www.ksb.rs/takmicenje1218/",
   },
 
   {
     id: "kadetkinje-u17-beogradska-liga-2026-27",
+    teamCategory: "Kadetkinje",
     team: "Kadetkinje U17",
-    teamCategory: "Kadetkinje U17",
-    competition: "Beogradska liga",
     season: "2026/27",
+    competition: "Ženska kadetska liga Beograda",
     status: "upcoming",
-
-    officialUrl: "https://www.ksb.rs/takmicenje1221/",
-
+    startDate: "24. oktobar 2026.",
     description:
-      "Kadetkinje U17 KK Borča takmiče se u Beogradskoj ligi u sezoni 2026/27.",
+      "Kadetkinje KK Borča takmiče se u Ženskoj kadetskoj ligi Beograda u sezoni 2026/27.",
+    nextGame: {
+      homeTeam: "KK Borča",
+      awayTeam: "ŽKK Radnički",
+      date: "24.10.2026.",
+      time: "15:15",
+      venue: "Hala Padinska Skela",
+    },
+    officialUrl: "https://www.ksb.rs/takmicenje1221/",
+  },
 
-    startDate: "Kraj oktobra 2026.",
+  {
+    id: "kadeti-u17-kvalifikacije-kvalitetna-liga-2026-27",
+    teamCategory: "Kadeti",
+    team: "Kadeti U17",
+    season: "2026/27",
+    competition: "Kvalifikacije za Kvalitetnu ligu Beograda – Grupa 5",
+    status: "upcoming",
+    startDate: "24. oktobar 2026.",
+    description:
+      "Kadeti KK Borča započinju sezonu 2026/27 u kvalifikacijama za Kvalitetnu ligu Beograda. Ekipa se takmiči u Grupi 5.",
+    nextGame: {
+      homeTeam: "KK Paragon (Lazarevac)",
+      awayTeam: "KK Borča",
+      date: "24.10.2026.",
+      time: "12:30",
+      venue: "Železnik – Hala FMP, Darinke Radović 8a",
+    },
+    officialUrl: "https://www.ksb.rs/takmicenje1215/grupa5/",
   },
 ];
-
-export function getActiveCompetitions(): Competition[] {
-  return competitions.filter(
-    (competition) => competition.status === "active"
-  );
-}
-
-export function getUpcomingCompetitions(): Competition[] {
-  return competitions.filter(
-    (competition) => competition.status === "upcoming"
-  );
-}
 
 export function getCurrentCompetitions(): Competition[] {
   return competitions.filter(
     (competition) =>
       competition.status === "active" ||
-      competition.status === "upcoming"
+      competition.status === "upcoming",
   );
 }
 
+export function getActiveCompetitions(): Competition[] {
+  return getCurrentCompetitions();
+}
+
 export function getCompetitionById(
-  id: string
+  id: string,
 ): Competition | undefined {
   return competitions.find(
-    (competition) => competition.id === id
+    (competition) => competition.id === id,
   );
 }
