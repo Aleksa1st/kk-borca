@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-
 import Image from "next/image";
-
 import Link from "next/link";
-
 import TeamPhotoLink from "@/components/teams/TeamPhotoLink";
 
 const SITE_URL = "https://kkborca.rs";
@@ -92,6 +89,9 @@ const boysTeams = [
   },
   {
     name: "Pioniri U15",
+    image: "/images/home/pioniri 2026-2027.jpg",
+    imageWidth: 1600,
+    imageHeight: 1067,
   },
   {
     name: "Kadeti U17",
@@ -128,6 +128,7 @@ const girlsTeams = [
 export default function TimoviPage() {
   return (
     <main>
+      {/* HERO */}
       <section className="bg-blue-950 px-6 pb-28 pt-48 text-white lg:pt-52">
         <div className="mx-auto max-w-7xl">
           <p className="font-bold uppercase tracking-[0.3em] text-yellow-300">
@@ -146,6 +147,7 @@ export default function TimoviPage() {
         </div>
       </section>
 
+      {/* STRUČNI TIM */}
       <section className="bg-white px-6 py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-4xl text-center">
@@ -289,6 +291,7 @@ export default function TimoviPage() {
         </div>
       </section>
 
+      {/* SELEKCIJE */}
       <section className="bg-slate-100 px-6 py-24">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-4xl text-center">
@@ -390,6 +393,7 @@ export default function TimoviPage() {
         </div>
       </section>
 
+      {/* TRENINZI */}
       <section className="bg-white px-6 py-24">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2">
           <div>
