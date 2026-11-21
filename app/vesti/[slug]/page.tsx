@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -51,7 +52,6 @@ export async function generateMetadata({
 
   return {
     title: article.title,
-
     description: article.excerpt,
 
     keywords: [
@@ -142,14 +142,12 @@ export default async function ArticlePage({
 
     headline: article.title,
     description: article.excerpt,
-
     image: [imageUrl],
 
-    datePublished: `${article.date}T12:00:00+02:00`,
-    dateModified: `${article.date}T12:00:00+02:00`,
+    datePublished: `${article.date}T12:00:00+01:00`,
+    dateModified: `${article.date}T12:00:00+01:00`,
 
     inLanguage: "sr-Latn-RS",
-
     articleSection: article.category,
 
     mainEntityOfPage: {
@@ -201,11 +199,15 @@ export default async function ArticlePage({
     ],
   };
 
-  const isFullImageArticle =
-    slug === "pionirke-pocinju-waba-u15-2026" ||
-    slug === "pionirke-waba-u15-prvi-prozor-banja-luka-2026" ||
-    slug === "kadetkinje-otvaraju-sezonu-protiv-zkk-radnicki-2026" ||
-    slug === "kk-borca-cerak-trece-kolo-2026";
+  // Vesti čije fotografije prikazujemo u celosti,
+  // bez odsecanja gornjeg ili donjeg dela.
+  const isFullImageArticle = [
+    "pionirke-pocinju-waba-u15-2026",
+    "pionirke-waba-u15-prvi-prozor-banja-luka-2026",
+    "kadetkinje-otvaraju-sezonu-protiv-zkk-radnicki-2026",
+    "kk-borca-cerak-trece-kolo-2026",
+    "borca-domacin-drugog-prozora-waba-u15-2026",
+  ].includes(slug);
 
   return (
     <main>
@@ -229,6 +231,7 @@ export default async function ArticlePage({
         }}
       />
 
+      {/* ZAGLAVLJE VESTI */}
       <section className="bg-blue-950 px-6 pb-20 pt-48 text-white lg:pt-52">
         <div className="mx-auto max-w-5xl">
           <nav aria-label="Putanja stranice">
@@ -294,18 +297,19 @@ export default async function ArticlePage({
         </div>
       </section>
 
+      {/* FOTOGRAFIJA I SADRŽAJ */}
       <section className="bg-white px-6 py-16">
         <article className="mx-auto max-w-5xl">
           {isFullImageArticle ? (
-            <div className="overflow-hidden rounded-3xl bg-slate-200 shadow-2xl">
+            <div className="overflow-hidden rounded-3xl bg-slate-100 shadow-2xl">
               <Image
                 src={article.image}
                 alt={`${article.title} – KK Borča`}
                 width={1118}
-                height={933}
+                height={1400}
                 priority
                 sizes="(max-width: 1024px) 100vw, 1024px"
-                className="h-auto w-full"
+                className="h-auto w-full object-contain"
               />
             </div>
           ) : (
@@ -343,6 +347,7 @@ export default async function ArticlePage({
         </article>
       </section>
 
+      {/* OSTATAK VESTI */}
       <section className="bg-slate-100 px-6 py-16 text-center">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-3xl font-black text-blue-950 md:text-4xl">
@@ -350,8 +355,8 @@ export default async function ArticlePage({
           </h2>
 
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-600">
-            Pročitajte najnovije vesti o ekipama, utakmicama, treninzima
-            i aktivnostima našeg kluba.
+            Pročitajte najnovije vesti o ekipama, utakmicama,
+            treninzima i aktivnostima našeg kluba.
           </p>
 
           <Link
