@@ -1,3 +1,4 @@
+
 export type CompetitionStatus = "active" | "upcoming";
 
 export type NextGame = {
@@ -18,6 +19,7 @@ export type Competition = {
   description?: string;
   startDate?: string;
   nextGame?: NextGame;
+  games?: NextGame[];
   officialUrl?: string;
 };
 
@@ -31,14 +33,53 @@ const competitions: Competition[] = [
     status: "active",
     description:
       "Seniorska ekipa KK Borča takmiči se u 2. MRL Centar u sezoni 2026/27.",
-    nextGame: {
-      homeTeam: "KK Borča",
-      awayTeam: "KK Cerak",
-      date: "24.10.2026.",
-      time: "17:30",
-      venue: "Hala Padinska Skela",
-    },
+    games: [
+      {
+        homeTeam: "KK Fleš",
+        awayTeam: "KK Borča",
+        date: "2026-11-23",
+        time: "21:20",
+        venue:
+          "Voždovac – Bora Stanković, Paunova 19a",
+      },
+    ],
     officialUrl: "https://www.ksb.rs/takmicenje1210/",
+  },
+
+  {
+    id: "mladji-pioniri-u13-druga-beogradska-liga-2026-27",
+    teamCategory: "Mlađi pioniri",
+    team: "Mlađi pioniri U13",
+    season: "2026/27",
+    competition: "2. beogradska liga U13 – Grupa 3",
+    status: "active",
+    description:
+      "Mlađi pioniri KK Borča takmiče se u 2. beogradskoj ligi U13, Grupa 3. Naredni protivnik je KK Ras 4, a tačan termin utakmice još nije potvrđen.",
+    officialUrl:
+      "https://www.ksb.rs/takmicenje1231/grupa3/",
+  },
+
+  {
+    id: "pioniri-u15-beogradska-liga-2026-27",
+    teamCategory: "Pioniri",
+    team: "Pioniri U15",
+    season: "2026/27",
+    competition: "Beogradska liga U15 – Grupa 3",
+    status: "active",
+    description:
+      "Pioniri KK Borča takmiče se u Beogradskoj ligi U15, Grupa 3.",
+    games: [
+      {
+        homeTeam: "ŠKK Zvezdara 3",
+        awayTeam: "KK Borča",
+        date: "2026-11-22",
+        time: "12:50",
+        venue:
+          "Mirijevo – Pavle Savić, Koste Nađa 25",
+      },
+    ],
+    officialUrl:
+      "https://www.ksb.rs/takmicenje1228/grupa3/",
   },
 
   {
@@ -49,9 +90,25 @@ const competitions: Competition[] = [
     competition: "WABA U15",
     status: "active",
     description:
-      "Pionirke KK Borča takmiče se u WABA U15 ligi u sezoni 2026/27.",
+      "Pionirke KK Borča nastupaju u regionalnoj WABA U15 ligi. Utakmice se prikazuju prema zvaničnom rasporedu takmičenja.",
+    games: [
+      {
+        homeTeam: "Borča Partizan 1953",
+        awayTeam: "Realway",
+        date: "2026-11-21",
+        time: "15:20",
+        venue: "Padinska Skela",
+      },
+      {
+        homeTeam: "Borča Partizan 1953",
+        awayTeam: "Play Off",
+        date: "2026-11-22",
+        time: "13:20",
+        venue: "Padinska Skela",
+      },
+    ],
     officialUrl:
-      "https://waba-league.com/season/standings/?leagueId=32033",
+      "https://waba-league.com/season/schedule-3/?leagueId=32033",
   },
 
   {
@@ -60,18 +117,11 @@ const competitions: Competition[] = [
     team: "Pionirke U15",
     season: "2026/27",
     competition: "Kvalitetna beogradska liga",
-    status: "upcoming",
-    startDate: "31. oktobar 2026.",
+    status: "active",
     description:
-      "Pionirke KK Borča takmiče se i u Kvalitetnoj beogradskoj ligi u sezoni 2026/27.",
-    nextGame: {
-      homeTeam: "ŽKK Vizura",
-      awayTeam: "KK Borča",
-      date: "31.10.2026.",
-      time: "Vreme još nije određeno",
-      venue: "Car Dušana 105, Zemun",
-    },
-    officialUrl: "https://www.ksb.rs/takmicenje1218/",
+      "Pionirke KK Borča takmiče se u Kvalitetnoj beogradskoj ligi. Naredni protivnik je ŽKK Ras, a tačan termin utakmice još nije potvrđen.",
+    officialUrl:
+      "https://www.ksb.rs/takmicenje1218/",
   },
 
   {
@@ -80,18 +130,21 @@ const competitions: Competition[] = [
     team: "Kadetkinje U17",
     season: "2026/27",
     competition: "Ženska kadetska liga Beograda",
-    status: "upcoming",
-    startDate: "24. oktobar 2026.",
+    status: "active",
     description:
-      "Kadetkinje KK Borča takmiče se u Ženskoj kadetskoj ligi Beograda u sezoni 2026/27.",
-    nextGame: {
-      homeTeam: "KK Borča",
-      awayTeam: "ŽKK Radnički",
-      date: "24.10.2026.",
-      time: "15:15",
-      venue: "Hala Padinska Skela",
-    },
-    officialUrl: "https://www.ksb.rs/takmicenje1221/",
+      "Kadetkinje KK Borča takmiče se u Ženskoj kadetskoj ligi Beograda.",
+    games: [
+      {
+        homeTeam: "ŽKK Borča",
+        awayTeam: "ŽKK Rudar 22",
+        date: "2026-11-24",
+        time: "19:20",
+        venue:
+          "Hala Padinska Skela, Dejana Smiljkovića 121",
+      },
+    ],
+    officialUrl:
+      "https://www.ksb.rs/takmicenje1221/",
   },
 
   {
@@ -101,18 +154,11 @@ const competitions: Competition[] = [
     season: "2026/27",
     competition:
       "Kvalifikacije za Kvalitetnu ligu Beograda – Grupa 5",
-    status: "upcoming",
-    startDate: "24. oktobar 2026.",
+    status: "active",
     description:
-      "Kadeti KK Borča započinju sezonu 2026/27 u kvalifikacijama za Kvalitetnu ligu Beograda. Ekipa se takmiči u Grupi 5.",
-    nextGame: {
-      homeTeam: "KK Paragon (Lazarevac)",
-      awayTeam: "KK Borča",
-      date: "24.10.2026.",
-      time: "12:30",
-      venue: "Železnik – Hala FMP, Darinke Radović 8a",
-    },
-    officialUrl: "https://www.ksb.rs/takmicenje1215/grupa5/",
+      "Kadeti KK Borča nastupali su u kvalifikacijama za Kvalitetnu ligu Beograda, Grupa 5. Prikazane kvalifikacione utakmice su završene. Čeka se potvrda narednog takmičarskog rasporeda.",
+    officialUrl:
+      "https://www.ksb.rs/takmicenje1215/grupa5/",
   },
 ];
 
@@ -125,7 +171,9 @@ export function getCurrentCompetitions(): Competition[] {
 }
 
 export function getActiveCompetitions(): Competition[] {
-  return getCurrentCompetitions();
+  return competitions.filter(
+    (competition) => competition.status === "active",
+  );
 }
 
 export function getCompetitionById(

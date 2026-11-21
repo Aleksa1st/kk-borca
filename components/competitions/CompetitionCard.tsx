@@ -1,21 +1,102 @@
+
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   CalendarDays,
   ExternalLink,
   MapPin,
 } from "lucide-react";
-import type { Competition } from "@/data/competitions";
+import type {
+  Competition,
+  NextGame,
+} from "@/data/competitions";
 
 type CompetitionCardProps = {
   competition: Competition;
 };
 
+function getBelgradeNow(): string {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/Belgrade",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(new Date());
+
+  const getPart = (type: string) =>
+    parts.find((part) => part.type === type)?.value ?? "";
+
+  return (
+    `${getPart("year")}-${getPart("month")}-${getPart("day")}` +
+    `T${getPart("hour")}:${getPart("minute")}`
+  );
+}
+
+function getNextGame(
+  competition: Competition,
+  now: string,
+): NextGame | undefined {
+  const games = competition.games ??
+    (competition.nextGame ? [competition.nextGame] : []);
+
+  return games
+    .filter((game) => {
+      const date = game.date;
+      const time = game.time;
+
+      if (
+        !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+        !/^\d{2}:\d{2}$/.test(time)
+      ) {
+        return false;
+      }
+
+      return `${date}T${time}` >= now;
+    })
+    .sort((a, b) =>
+      `${a.date}T${a.time}`.localeCompare(
+        `${b.date}T${b.time}`,
+      ),
+    )[0];
+}
+
+function formatGameDate(date: string): string {
+  const [year, month, day] = date.split("-");
+
+  return `${day}.${month}.${year}.`;
+}
+
 export default function CompetitionCard({
   competition,
 }: CompetitionCardProps) {
-  const { nextGame } = competition;
+  const [now, setNow] = useState<string | null>(null);
+
+  useEffect(() => {
+    const updateNow = () => {
+      setNow(getBelgradeNow());
+    };
+
+    updateNow();
+
+    const interval = window.setInterval(updateNow, 60_000);
+
+    return () => window.clearInterval(interval);
+  }, []);
 
   const isActive = competition.status === "active";
   const isUpcoming = competition.status === "upcoming";
+
+  const nextGame = now
+    ? getNextGame(competition, now)
+    : undefined;
+
+  const hasScheduledGames =
+    (competition.games?.length ?? 0) > 0 ||
+    Boolean(competition.nextGame);
 
   return (
     <article className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
@@ -68,7 +149,7 @@ export default function CompetitionCard({
           </p>
         )}
 
-        {/* UPCOMING */}
+        {/* UPCOMING COMPETITION */}
         {isUpcoming && (
           <div className="mt-7 rounded-2xl bg-slate-100 p-5">
             <p className="text-sm font-black uppercase tracking-[0.18em] text-blue-700">
@@ -78,21 +159,16 @@ export default function CompetitionCard({
             <p className="mt-3 text-xl font-black text-blue-950">
               {competition.startDate ?? "Uskoro"}
             </p>
-
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              Raspored i rezultati biće dostupni na zvaničnoj stranici
-              takmičenja kada liga počne.
-            </p>
           </div>
         )}
 
         {/* NEXT GAME */}
-        {nextGame && (
-          <div className="mt-7 rounded-2xl bg-slate-100 p-5">
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-blue-700">
-              Sledeća utakmica
-            </p>
+        <div className="mt-7 rounded-2xl bg-slate-100 p-5">
+          <p className="text-sm font-black uppercase tracking-[0.18em] text-blue-700">
+            Sledeća utakmica
+          </p>
 
+          {nextGame ? (
             <div className="mt-4">
               <p className="text-xl font-black text-blue-950">
                 {nextGame.homeTeam} – {nextGame.awayTeam}
@@ -106,7 +182,8 @@ export default function CompetitionCard({
                   />
 
                   <span>
-                    {nextGame.date} · {nextGame.time}
+                    {formatGameDate(nextGame.date)} ·{" "}
+                    {nextGame.time}
                   </span>
                 </div>
 
@@ -120,12 +197,20 @@ export default function CompetitionCard({
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <p className="mt-3 leading-7 text-slate-600">
+              {!now
+                ? "Proveravamo raspored utakmica..."
+                : hasScheduledGames
+                  ? "Trenutno nemamo potvrđen termin naredne utakmice. Proverite zvanični raspored takmičenja."
+                  : "Datum i vreme naredne utakmice još nisu potvrđeni. Proverite zvanični raspored takmičenja."}
+            </p>
+          )}
+        </div>
 
         {/* OFFICIAL LINK */}
-        <div className="mt-7">
-          {competition.officialUrl && (
+        {competition.officialUrl && (
+          <div className="mt-7">
             <a
               href={competition.officialUrl}
               target="_blank"
@@ -133,13 +218,14 @@ export default function CompetitionCard({
               className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-700 px-6 py-4 font-black text-white transition hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-200"
             >
               Tabela i rezultati
+
               <ExternalLink
                 className="h-5 w-5"
                 aria-hidden="true"
               />
             </a>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </article>
   );
